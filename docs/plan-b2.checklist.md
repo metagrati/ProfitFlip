@@ -1,10 +1,19 @@
 # Plan B⁗.2 — progress tracker
-<!-- Auto-updated by .github/workflows/update-checklist.yml -->
+
 ## Patches
 - [ ] P1 secrets-verify committed and green in CI
 - [ ] P2 Fly cold-start guard merged
+- [ ] P3 entrypoint.sh idempotent migrations
+- [ ] P4 demo wallet pre-fund
+- [ ] P5 rollback observability
+- [ ] P6 pm2 log rotation + tmux tweaks
+- [ ] P7 pnpm-store path pinned
+- [ ] P8 CI gate hard-fail / timeout
+
 ## Drills
-- [ ] Green-flag drill completed (`./scripts/run-green-flag.sh`)
+- [ ] Green-flag drill completed
 - [ ] Live-fire rollback rehearsal completed
+
 ## Definition of Done
-- [ ] Secrets-verify passes on both Fly & Vercel (ID 10)
+- [ ] secrets-verify passes on Fly & Vercel
+

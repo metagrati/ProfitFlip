@@ -1,102 +1,157 @@
-# ----------------------------------------------
-# bootstrap-plan-b2.sh
-# ----------------------------------------------
+#!/bin/bash
 set -euo pipefail
+
+echo "🛠 Bootstrapping Plan B checklist system..."
+
+# 0. Requirements check
+REQUIRED_CMDS=("node" "npm" "git")
+for cmd in "${REQUIRED_CMDS[@]}"; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "❌ Required command '$cmd' is not installed. Please install it and re-run."
+    exit 1
+  fi
+done
+
+# Ensure local Node modules folder exists
+mkdir -p node_modules
+
+# 1. Install js-yaml if not present
+if ! node -e "require('js-yaml')" &>/dev/null; then
+  echo "📦 Installing 'js-yaml' locally..."
+  npm install js-yaml --save-dev > /dev/null
+else
+  echo "✅ js-yaml is already installed"
+fi
+
+# 2. Create structure
 mkdir -p docs scripts bin .github/workflows .github/actions/tick-checklist
-cat > docs/plan-b2.checklist.md <<"EOF"
-# Plan B⁗.2 — progress tracker
-<!-- Auto-updated by .github/workflows/update-checklist.yml -->
-## Patches
-- [ ] P1 secrets-verify committed and green in CI
-- [ ] P2 Fly cold-start guard merged
-## Drills
-- [ ] Green-flag drill completed (`./scripts/run-green-flag.sh`)
-- [ ] Live-fire rollback rehearsal completed
-## Definition of Done
-- [ ] Secrets-verify passes on both Fly & Vercel (ID 10)
+
+# 3. YAML source of truth
+cat > plan-b2.yaml <<EOF
+patches:
+  P1: secrets-verify committed and green in CI
+  P2: Fly cold-start guard merged
+  P3: entrypoint.sh idempotent migrations
+  P4: demo wallet pre-fund
+  P5: rollback observability
+  P6: pm2 log rotation + tmux tweaks
+  P7: pnpm-store path pinned
+  P8: CI gate hard-fail / timeout
+drills:
+  - Green-flag drill completed
+  - Live-fire rollback rehearsal completed
+done:
+  - secrets-verify passes on Fly & Vercel
 EOF
 
-cat > scripts/stopwatch.sh <<"EOF"
-#!/usr/bin/env bash
-set -euo pipefail
-CMD=${1:-start}; TMP=/tmp/plan_b_stopwatch
-[[ "$CMD" == start ]] && { date -u +%s > "$TMP"; echo "Stopwatch started."; exit; }
-[[ "$CMD" == check ]] || { echo "Usage: $0 {start|check}"; exit 1; }
-[[ -f "$TMP" ]] || { echo "::error::Stopwatch not started."; exit 1; }
-START=$(cat "$TMP"); NOW=$(date -u +%s); DUR=$((NOW-START)); echo "Elapsed ${DUR}s"
-(( DUR > 7200 )) && { echo "::error::>2 h buffer blown"; exit 1; }
-EOF
-chmod +x scripts/stopwatch.sh
-
-cat > scripts/run-green-flag.sh <<"EOF"
-#!/usr/bin/env bash
-set -euo pipefail
-pnpm run smoke:fork
-pnpm run smoke:amoy
-curl -fsS --max-time 5 https://demo.vercel.app/api/ping
-curl -fsS --max-time 5 https://operator.fly.dev/healthz
-EOF
-chmod +x scripts/run-green-flag.sh
-
-cat > bin/lint-checklist.js <<"EOF"
-// simple duplicate checker
+# 4. Checklist generator
+cat > bin/gen-checklist.js <<'EOF'
 #!/usr/bin/env node
 const fs = require('fs');
-const md = fs.readFileSync(process.argv[2]||'docs/plan-b2.checklist.md','utf8').split('\n');
-const dupe = md.filter(l=>/^-\s\[\s\]/.test(l)).map(l=>l.slice(6).trim())
-  .filter((v,i,a)=>a.indexOf(v)!==i);
-if(dupe.length){ console.error('Duplicates:',dupe); process.exit(1); }
-console.log('Checklist OK, unchecked:', md.filter(l=>/^-\s\[\s\]/.test(l)).length);
+const yaml = require('js-yaml');
+const src = yaml.load(fs.readFileSync('plan-b2.yaml', 'utf8'));
+let md = '# Plan B⁗.2 — progress tracker\n\n';
+for (const [section, body] of Object.entries({
+  Patches: src.patches,
+  Drills:  src.drills,
+  'Definition of Done': src.done
+})) {
+  md += `## ${section}\n`;
+  if (Array.isArray(body)) {
+    body.forEach(i => md += `- [ ] ${i}\n`);
+  } else {
+    Object.entries(body).forEach(([k,v]) => md += `- [ ] ${k} ${v}\n`);
+  }
+  md += '\n';
+}
+fs.writeFileSync('docs/plan-b2.checklist.md', md);
+EOF
+chmod +x bin/gen-checklist.js
+node bin/gen-checklist.js
+
+# 5. Checklist linter
+cat > bin/lint-checklist.js <<'EOF'
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const FILE = path.join(__dirname, '..', 'docs', 'plan-b2.checklist.md');
+const raw = fs.readFileSync(FILE, 'utf8').split('\n');
+const boxRx = /^- \[([ x])] (.+)$/;
+const items = [];
+let badLine = null;
+raw.forEach((line, idx) => {
+  const m = line.match(boxRx);
+  if (m) {
+    const text = m[2].trim();
+    items.push({ text, idx: idx + 1 });
+  } else if (line.startsWith('- [')) {
+    badLine = idx + 1;
+  }
+});
+if (badLine) { console.error(`Malformed checkbox at line ${badLine}`); process.exit(1); }
+const dups = items.filter((v, i, arr) => arr.findIndex(w => w.text === v.text) !== i);
+if (dups.length) { console.error('Duplicate checklist items:', dups.map(d => d.text)); process.exit(2); }
+const patchIds = items.map(i => i.text.match(/^(P\d+)/)).filter(Boolean).map(m => m[1]);
+if (patchIds.length) {
+  const sorted = [...patchIds].sort((a, b) => parseInt(a.slice(1)) - parseInt(b.slice(1)));
+  if (patchIds.join() !== sorted.join()) {
+    console.error('Patch items out of order:', patchIds.join(', '));
+    process.exit(3);
+  }
+}
+console.log('Checklist lint ✔');
 EOF
 chmod +x bin/lint-checklist.js
 
-cat > .github/workflows/ci-status.yml <<"EOF"
-name: CI Status
-on: [push, pull_request]
-jobs:
-  progress:
-    if: ${{ github.actor != 'github-actions[bot]' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: {node-version: 20}
-      - run: npm i -g pnpm
-      - run: ./scripts/run-green-flag.sh
-      - uses: ./.github/actions/tick-checklist
-        with:
-          checklist-path: docs/plan-b2.checklist.md
-          items: |
-            P1 secrets-verify committed and green in CI
-            Green-flag drill completed (`./scripts/run-green-flag.sh`)
-      - uses: peter-evans/create-pull-request@v6
-        with:
-          branch: progress-bot/${{ github.run_id }}
-          delete-branch: true
-          title: "chore(progress): auto-update checklist"
-          commit-message: "chore(progress): auto-tick items"
-EOF
-
-mkdir -p .github/actions/tick-checklist
-cat > .github/actions/tick-checklist/action.yml <<"EOF"
-name: Tick Checklist
-inputs:
-  checklist-path: {required: true}
-  items: {required: true}
+# 6. GitHub Action: tick-checklist
+cat > .github/actions/tick-checklist/action.yml <<EOF
+name: Tick Checklist Item
+description: Mark a Markdown checklist item as done with audit trail.
 runs:
-  using: node20
-  main: index.js
+  using: 'node16'
+  main: 'index.js'
+inputs:
+  item:
+    description: 'Exact text or unique substring of the checklist line'
+    required: true
+  path:
+    description: 'Relative path to checklist file'
+    default: 'docs/plan-b2.checklist.md'
 EOF
 
-cat > .github/actions/tick-checklist/index.js <<"EOF"
-const fs = require('fs'); const core = require('@actions/core');
-const path = core.getInput('checklist-path'); const targets = core.getInput('items').split('\n').filter(Boolean);
-const lines = fs.readFileSync(path,'utf8').split('\n'); let dirty=false;
-lines.forEach((l,i)=>targets.forEach(t=>{ if(l.trim()==`- [ ] ${t}`){lines[i]=l.replace('- [ ]','- [x]'); dirty=true;} }));
-dirty && fs.writeFileSync(path,lines.join('\n'));
+cat > .github/actions/tick-checklist/index.js <<'EOF'
+const core = require('@actions/core');
+const fs   = require('fs');
+const path = require('path');
+
+(async () => {
+  try {
+    const item = core.getInput('item', { required: true });
+    const file = core.getInput('path');
+    const FILE = path.join(process.cwd(), file);
+    let txt = fs.readFileSync(FILE, 'utf8');
+    const now = new Date().toISOString().slice(0,16).replace('T',' ');
+    const esc = item.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const rx  = new RegExp(`^- \\[ \\] .*${esc}.*$`, 'm');
+    if (!rx.test(txt)) throw new Error(`Item not found: ${item}`);
+    txt = txt.replace(rx, m =>
+      m.replace('- [ ]', '- [x]')
+        .concat(` <!-- done-by @${process.env.GITHUB_ACTOR || 'local'} at ${now} -->`)
+    );
+    fs.writeFileSync(FILE, txt);
+    console.log(`✔ ticked: ${item}`);
+  } catch (e) {
+    core.setFailed(e.message);
+  }
+})();
 EOF
-echo ".DS_Store\nnode_modules" > .gitignore
-git init && git add . && git commit -m "feat: scaffold Plan B⁗.2 launch kit"
-echo "Repo ready → push to GitHub when you’re set."
-# ----------------------------------------------
+
+# 7. Commit
+git add .
+git commit -m "feat(plan-b): scaffold checklist system, generator, linter, local action"
+
+echo ""
+echo "✅ Bootstrapped successfully!"
+echo "📌 Next: review and push with:"
+echo "   git push origin main"
 

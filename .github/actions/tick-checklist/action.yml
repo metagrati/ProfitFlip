@@ -1,7 +1,12 @@
-name: Tick Checklist
-inputs:
-  checklist-path: {required: true}
-  items: {required: true}
+name: Tick Checklist Item
+description: Mark a Markdown checklist item as done with audit trail.
 runs:
-  using: node20
-  main: index.js
+  using: 'node16'
+  main: 'index.js'
+inputs:
+  item:
+    description: 'Exact text or unique substring of the checklist line'
+    required: true
+  path:
+    description: 'Relative path to checklist file'
+    default: 'docs/plan-b2.checklist.md'

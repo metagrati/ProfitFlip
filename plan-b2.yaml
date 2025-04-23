@@ -1,0 +1,14 @@
+patches:
+  P1: secrets-verify committed and green in CI
+  P2: Fly cold-start guard merged
+  P3: entrypoint.sh idempotent migrations
+  P4: demo wallet pre-fund
+  P5: rollback observability
+  P6: pm2 log rotation + tmux tweaks
+  P7: pnpm-store path pinned
+  P8: CI gate hard-fail / timeout
+drills:
+  - Green-flag drill completed
+  - Live-fire rollback rehearsal completed
+done:
+  - secrets-verify passes on Fly & Vercel
