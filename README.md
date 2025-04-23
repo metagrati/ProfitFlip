@@ -1,4 +1,4 @@
-# ProfitFlip — One-Pane-of-Glass CI & Automation Strategy
+# ProfitFlip — A prediction game.
 
 ProfitFlip is a CI-first project built around three uncompromising principles:
 
