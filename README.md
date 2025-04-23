@@ -8,6 +8,8 @@ ProfitFlip is a CI-first project built around three uncompromising principles:
 
 ---
 
+![deadline](https://img.shields.io/relative-date/1745445829?label=deadline&color=critical)
+
 ## 📊 Project Task Log
 
 ✅ = complete 🔄 = in progress 🛑 = skipped
