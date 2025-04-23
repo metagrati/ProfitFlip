@@ -1,0 +1,24 @@
+name: CI Status
+on: [push, pull_request]
+jobs:
+  progress:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 20}
+      - run: npm i -g pnpm
+      - run: ./scripts/run-green-flag.sh
+      - uses: ./.github/actions/tick-checklist
+        with:
+          checklist-path: docs/plan-b2.checklist.md
+          items: |
+            P1 secrets-verify committed and green in CI
+            Green-flag drill completed (`./scripts/run-green-flag.sh`)
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          branch: progress-bot/${{ github.run_id }}
+          delete-branch: true
+          title: "chore(progress): auto-update checklist"
+          commit-message: "chore(progress): auto-tick items"

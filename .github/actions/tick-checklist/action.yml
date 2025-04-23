@@ -1,0 +1,7 @@
+name: Tick Checklist
+inputs:
+  checklist-path: {required: true}
+  items: {required: true}
+runs:
+  using: node20
+  main: index.js
