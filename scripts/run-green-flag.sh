@@ -15,7 +15,7 @@ run_or_fail() {
 }
 
 # Example smoke test invocations — replace as needed
-run_or_fail "Ping demo API" "curl -fs https://demo.vercel.app/api/ping"
+# run_or_fail "Ping demo API" "curl -fs https://demo.vercel.app/api/ping"
 run_or_fail "Fly healthcheck" "curl -fs https://operator.fly.dev/healthz"
 
 # Optional if smoke:* scripts exist

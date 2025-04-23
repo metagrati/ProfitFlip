@@ -1,3 +1,4 @@
 .DS_Store\nnode_modules
 kg-repo.bash
 repo-kg.json
+node_modules
