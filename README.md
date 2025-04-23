@@ -8,53 +8,50 @@ ProfitFlip is a CI-first project built around three uncompromising principles:
 
 ---
 
-## 📊 Live Project Status
+## 📊 Project Task Log
 
-All progress is tracked here, by design.  
-✅ = complete 🔄 = in progress 🛑 = abandoned or deferred
-
-### 🔧 Infrastructure Milestones
+✅ = complete 🔄 = in progress 🛑 = skipped
 
 | Status | Task |
 |--------|------|
-| ✅ | Scaffolded Plan B checklist (`plan-b2.yaml → .checklist.md`) |
-| ✅ | Built GitHub Action to auto-tick items in CI |
-| ✅ | Enforced 2-hour CI buffer via stopwatch |
-| ✅ | Hardened `run-green-flag.sh` with fail groups + logs |
-| ✅ | Created Bash Vault for reusable ops scripts |
-| ✅ | Patched broken demo.vercel.app smoke test |
-| 🔄 | Finalize vault auto-index + script generator (`sync-index.js`, `new-script.sh`) |
-| ✅ | Makefile with `checklist`, `smoke`, `new`, and `sync` |
-| 🛑 | GitHub Kanban board approach (replaced by this file) |
+| ✅ | Scaffolded Plan B checklist system |
+| ✅ | CI job ticks checklist items using `tick-checklist` |
+| ✅ | `run-green-flag.sh` enforces buffer and logs failures |
+| ✅ | `bash-vault/` created with script + metadata scaffold |
+| 🔄 | Finish vault generator (`new-script.sh`) |
+| 🔄 | Populate vault with first real script |
+| 🔄 | Auto-generate `bash-vault/index.md` with sync-index.js |
+| ✅ | Patched failing `demo.vercel.app` smoke test |
+| 🛑 | Dropped GitHub Projects in favor of README tracking |
 
 ---
 
-## 🧠 Project Strategy
+## 🧠 Strategy
 
-This README is the **execution dashboard**. We deliberately:
-- Avoid GitHub Issues or Projects for tracking
-- Use `README.md` for high-level progress
-- Use `docs/plan-b2.checklist.md` for CI-executable tasks
-- Use `bash-vault/` to persist and index reusable bash scripts
-
-This keeps the project **self-evident, searchable, and forkable**.
+We do not use GitHub Issues, Projects, or external tools to track tasks.  
+This `README.md` and the CI-verified checklist are the **only sources of truth**.
 
 ---
 
-## 🔍 Key Repos Files
+## 🧩 Key Files
 
-| File | Purpose |
-|------|---------|
-| [`docs/plan-b2.checklist.md`](docs/plan-b2.checklist.md) | Task checklist auto-updated by CI |
-| [`plan-b2.yaml`](plan-b2.yaml) | Authoritative backlog source |
-| [`bash-vault/`](bash-vault/) | All reusable scripts with `.meta.json` context |
-| [`Makefile`](Makefile) | CLI wrapper for local developer actions |
+| File | Description |
+|------|-------------|
+| `plan-b2.yaml` | Backlog source of truth |
+| `docs/plan-b2.checklist.md` | CI-driven task checklist |
+| `scripts/run-green-flag.sh` | Smoke test + buffer fail logic |
+| `bash-vault/` | Reusable script storage with metadata |
+| `Makefile` | Task runner: `make new`, `make sync`, `make checklist` |
 
 ---
 
-## 🛠 How to Use Locally
-
-### Run smoke test + CI timer:
+## 🚀 Quickstart
 
 ```bash
-make smoke
+git clone https://github.com/metagrati/ProfitFlip.git
+pnpm install
+./bootstrap-plan-b2.sh
+make checklist        # regenerate .checklist.md
+make smoke            # run CI drills
+make new NAME=fix-env.sh
+make sync             # update vault index
