@@ -1,0 +1,150 @@
+# ==========================================================
+# 📄 ProfitFlip Front-End Build Context v1.1  (polished)
+# ==========================================================
+meta:
+  generated: "2025-04-24"
+  sourceSpec: "Requirements + Spec + Review (24 Apr 2025)" # :contentReference[oaicite: 0]{index=0}&#8203;:contentReference[oaicite: 1]{index=1}
+  revision_notes: |
+    • Tightened wording, normalised keys, alphabetised lists
+    • Expanded all acronyms (WCAG, LCP, CSP, etc.)
+    • Added glossary and explicit token count hint (< 450 tokens)
+product:
+  name: "ProfitFlip"
+  summary: "Cryptocurrency prediction game – users wager every 3-5 min on BTC ↔ USD direction"
+  fee_percent: 2
+  token_label: "POL" # Display alias for Polygon's native coin (MATIC)
+tech_stack:
+  bundler: "Vite"
+  framework: "React 18 (Strict Mode)"
+  language: "TypeScript 5 (all strict flags)"
+  styling:
+    - "Tailwind CSS"
+    - "shadcn/ui"
+    - "lucide-react icons"
+  state: "React Context → (optionally) Zustand later"
+  blockchain_libs:
+    - "wagmi"
+    - "viem"
+    - "ethers v6"
+  animation: "Framer Motion"
+ux_flows:
+  wallet_connect:
+    behaviour: |
+      Re-own modal + wagmi connectors.
+      Auto-prompt switch to Polygon (Amoy → Mainnet).
+      Persist last wallet (localStorage key: walletAddress).
+  carousel:
+    layout: "Horizontal scroll-snap"
+    cards: {past: 2, current: 1, future: 1}
+  prediction_card:
+    fields:
+      - epoch
+      - minStake
+      - oraclePrice
+      - players
+      - countdown
+  cta_logic:
+    - show:
+        - "Bet Bull"
+        - "Bet Bear"
+      when: "wallet && roundLive"
+    - show:
+        - "Connect Wallet"
+      when: "!wallet"
+  bet_action:
+    contract_calls: {bull: "betBull(epoch)", bear: "betBear(epoch)"}
+    min_bet_wei: "{{contract.minBetAmount}}"
+    ui_feedback:
+      - "optimistic UI"
+      - "Framer flip at lock"
+      - "toast on success"
+  history_table:
+    - epoch
+    - position
+    - stake
+    - result
+    - claimed
+  claim_all: "Claim" # Aggregated claim transaction
+  refresh_strategy: "poll 15 s → migrate to subscribeLogs / GraphQL Subgraph"
+components:
+  - PredictionCard.tsx
+  - Carousel.tsx
+  - ConnectWalletButton.tsx
+  - UserHistory.tsx
+  - ClaimAllButton.tsx
+hooks:
+  - usePredictionGame # wraps contract reads, keeps live round state
+  - useUserRounds # returns past / pending rounds for current wallet
+design_tokens:
+  colors:
+    primary: "hsl(250 80% 60%)"
+    surface: "hsl(250 15% 94%)"
+  radius: "1rem"
+  motion:
+    duration_ms: 250
+    easing: "ease-out"
+non_functionals:
+  performance:
+    bundle_max_gzip_kb: 200
+    lcp_max_seconds_4g: 3 # Largest Contentful Paint on 4 G
+  accessibility: "WCAG 2.1 AA (axe-core in CI)"
+  responsiveness: "mobile-first; no fixed widths"
+  rtl_support: true # Right-to-Left languages (e.g., Hebrew)
+  security:
+    headers: "Content-Security-Policy 'strict-dynamic'"
+    xss: "DOMPurify (or equivalent) sanitiser"
+    reentrancy: "Handled in contract"
+  observability:
+    - "Sentry breadcrumbs"
+    - "wagmi debug logs"
+testing:
+  unit: "Jest + React Testing Library – ≥80 % coverage"
+  mutation: "Stryker on math helpers"
+  e2e: "Playwright (Chrome, Firefox, and mobile emulation)"
+  accessibility: "npm run a11y → axe-core + colour-contrast"
+  bundle_guard:
+    - "size-limit"
+    - "source-map-explorer"
+ci_cd:
+  pipeline:
+    - "pnpm install --frozen-lockfile"
+    - "lint → unit → mutation tests"
+    - "build → Lighthouse-CI"
+    - "Playwright matrix"
+    - "deploy preview → Vercel / Netlify"
+  container: "Docker multistage (Vite → Nginx) with health-check"
+  secrets: "GitHub OIDC → cloud secret manager (RPC key, Sentry DSN)"
+  rollback: "GitHub Deployments auto-revert on failed health probe"
+risks:
+  - id: R1
+    title: "Polling overload"
+    mitigation: "Switch to subscribeLogs + Subgraph"
+  - id: R2
+    title: "Oracle downtime"
+    mitigation: "Auto-void epoch, UI refund banner"
+  - id: R3
+    title: "Gas spikes"
+    mitigation: "Pre-tx gas & USD preview, retry option"
+coding_conventions:
+  - "React Function Components only – no class components"
+  - "Strict TypeScript; never use `any`"
+  - "Tailwind via `cn()` helper (shadcn)"
+  - "Atomic commits – one component/hook per commit"
+  - "Do not introduce libs > 30 kB gzipped without approval"
+  - "Always preserve WCAG & bundle budgets"
+output_contract:
+  format: |
+    Respond with **FILE**: <path>
+    ```tsx
+    // code
+    ```
+    no extra prose. Ask clarifying questions instead of guessing.
+glossary:
+  CSP: "Content-Security-Policy"
+  LCP: "Largest Contentful Paint"
+  POL: "Brand label for MATIC"
+  RTL: "Right-to-Left"
+  WCAG: "Web Content Accessibility Guidelines"
+token_hint: "≈ 430 tokens"
+
+# ==========================================================
