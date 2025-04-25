@@ -1,8 +1,9 @@
 {
   "devDependencies": {
+    "@types/node": "^22.15.2",
     "js-yaml": "^4.1.0",
-    "typescript": "^5.5.4",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.1",

@@ -1,5 +1,3 @@
-import process from 'node:process';
-
 // Define the list of environment variables that are required.
 // TODO: Populate this array with the actual required environment variable names.
 const REQUIRED_ENV: string[] = [];
