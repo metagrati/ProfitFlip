@@ -10,21 +10,50 @@ ProfitFlip is a CI-first project built around three uncompromising principles:
 
 + ![deadline](https://img.shields.io/date/1745697600.svg?label=deadline&color=critical&cacheSeconds=300)
 
-## 📊 Project Task Log
+## �� Project Task Log
 
-✅ = complete 🔄 = in progress 🛑 = skipped
+Tracking progress against `plan-b2.yaml`.
 
-| Status | Task |
-|--------|------|
-| ✅ | Scaffolded Plan B checklist system |
-| ✅ | CI job ticks checklist items using `tick-checklist` |
-| ✅ | `run-green-flag.sh` enforces buffer and logs failures |
-| ✅ | `bash-vault/` created with script + metadata scaffold |
-| 🔄 | Finish vault generator (`new-script.sh`) |
-| 🔄 | Populate vault with first real script |
-| 🔄 | Auto-generate `bash-vault/index.md` with sync-index.js |
-| ✅ | Patched failing `demo.vercel.app` smoke test |
-| 🛑 | Dropped GitHub Projects in favor of README tracking |
+✅ = complete 🔄 = in progress 🚧 = planned 🛑 = skipped
+
+### Bootstrap & CI Setup
+
+| Status | Task                                                  | Notes / Related Patch |
+|--------|-------------------------------------------------------|-----------------------|
+| ✅     | Scaffolded Plan B checklist system                    |                       |
+| ✅     | CI job ticks checklist items using `tick-checklist`   |                       |
+| ✅     | `run-green-flag.sh` enforces buffer and logs failures |                       |
+| ✅     | Patched failing `demo.vercel.app` smoke test          |                       |
+
+### Patch Implementation (`plan-b2.yaml`)
+
+| Patch | Status | Task                                           | Notes                           |
+|-------|--------|------------------------------------------------|---------------------------------|
+| **P1**| 🔄     | `secrets-verify.ts` script structure created   | Checks required env vars        |
+|       | 🚧     | Populate `REQUIRED_ENV` in `secrets-verify.ts` | Needs actual variable list      |
+|       | 🚧     | Ensure `secrets-verify` green in CI          | Requires variables to be set    |
+| **P2**| 🚧     | Implement Fly cold-start guard                 | Ref: Review Doc P2              |
+| **P3**| 🚧     | Make `entrypoint.sh` migrations idempotent     | Ref: Review Doc P3              |
+| **P4**| 🚧     | Implement demo wallet pre-funding              | Ref: Review Doc P4              |
+| **P5**| 🚧     | Implement rollback observability enhancements  | Ref: Review Doc P5              |
+| **P6**| 🚧     | Implement pm2 log rotation + tmux tweaks       | Ref: Review Doc P6              |
+| **P7**| 🚧     | Pin `pnpm-store` path                          | Ref: Review Doc P7              |
+| **P8**| 🚧     | Implement CI gate hard-fail / timeout        | Ref: Review Doc P4/P8 (`timeout`)| 
+
+### Feature: Bash Vault
+
+| Status | Task                                                  | Notes                 |
+|--------|-------------------------------------------------------|-----------------------|
+| ✅     | `bash-vault/` created with script + metadata scaffold |                       |
+| 🔄     | Finish vault generator (`new-script.sh`)              |                       |
+| 🔄     | Populate vault with first real script                 |                       |
+| 🔄     | Auto-generate `bash-vault/index.md`                 | Via `make sync`       |
+
+### Process Changes
+
+| Status | Task                                                 | Notes                 |
+|--------|------------------------------------------------------|-----------------------|
+| 🛑     | Dropped GitHub Projects in favor of README tracking  |                       |
 
 ---
 
