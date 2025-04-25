@@ -118,6 +118,13 @@
       "schema:name": "kg/immediate_next_step_plan.json",
       "schema:description": "KG outlining the plan to resolve the PR permission failure, based on the motivation KG.",
       "pf:basedOnMotivation": "file:motivation-pr-perms"
+    },
+    {
+      "@id": "file:result-resolve-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/immediate_next_step_result.json",
+      "schema:description": "KG documenting the failed outcome of the plan to resolve the PR permission failure.",
+      "pf:outcomeOfPlan": "file:plan-resolve-pr-perms"
     }
   ]
 } 
