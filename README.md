@@ -6,6 +6,9 @@ ProfitFlip is a CI-first project built around three uncompromising principles:
 2. **Scripts are durable, auditable, and built for reuse.**
 3. **The README you are reading is the single source of truth.**
 
+> [!IMPORTANT]
+> Before every commit, please check this README and update it accordingly to reflect your changes.
+
 ---
 
 + ![deadline](https://img.shields.io/date/1745697600.svg?label=deadline&color=critical&cacheSeconds=300)
