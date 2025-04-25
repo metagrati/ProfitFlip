@@ -25,6 +25,7 @@ jobs:
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: progress-bot/${{ github.run_id }}
+          base: main
           delete-branch: true
           title: "chore(progress): auto-update checklist"
           commit-message: "chore(progress): auto-tick items"
