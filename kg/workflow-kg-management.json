@@ -1,0 +1,113 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "wf": "https://profitflip.io/kg/workflow#",
+    "meta": "https://profitflip.io/meta#",
+    "artifact": "pf:artifact/",
+    "schema": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hasStep": { "@id": "wf:hasStep", "@type": "@id", "@container": "@list" }, // Use @list for ordered steps
+    "precedes": { "@id": "wf:precedes", "@type": "@id" },
+    "targets": { "@id": "wf:targets", "@type": "@id", "@container": "@set" },
+    "produces": { "@id": "wf:produces", "@type": "@id" },
+    "persistsTo": { "@id": "wf:persistsTo", "@type": "@id" },
+    "modifies": { "@id": "wf:modifies", "@type": "@id" },
+    "isIterative": { "@id": "wf:isIterative", "@type": "xsd:boolean" },
+    "triggerCondition": { "@id": "wf:triggerCondition" },
+    "description": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "wf:KG_Management_Workflow_v1",
+  "@type": "wf:WorkflowProcess",
+  "name": "Knowledge Graph Management Workflow",
+  "description": "Describes the process for reviewing, planning, and updating Knowledge Graphs within the repository.",
+  "created": "2025-07-24T10:40:00Z",
+  "hasStep": [
+    "wf:step/ReviewExistingKGs",
+    "wf:step/GenerateReviewKG",
+    "wf:step/PlanNextStep",
+    "wf:step/SavePlanKG",
+    "wf:step/ReviewPlanKG",
+    "wf:step/RefinePlanKG",
+    "wf:step/UpdateSystemStateKG"
+  ],
+  "@graph": [
+    // Workflow Steps
+    {
+      "@id": "wf:step/ReviewExistingKGs",
+      "@type": "wf:WorkflowStep",
+      "name": "Review Existing KGs",
+      "description": "Manually review all primary KG files in the /kg directory.",
+      "precedes": "wf:step/GenerateReviewKG",
+      "targets": [
+        "artifact:kg-plan",
+        "artifact:kg-meta-plan",
+        "artifact:kg-requirements",
+        "artifact:kg-system-state",
+        "artifact:kg-registry" // Include the registry in reviews
+      ]
+    },
+    {
+      "@id": "wf:step/GenerateReviewKG",
+      "@type": "wf:WorkflowStep",
+      "name": "Generate Review KG",
+      "description": "Create a new KG artifact summarizing the findings of the review (e.g., review-kg-files.json).",
+      "precedes": "wf:step/PlanNextStep",
+      "produces": "artifact:kg-review" // Reference the type of artifact produced
+    },
+    {
+      "@id": "wf:step/PlanNextStep",
+      "@type": "wf:WorkflowStep",
+      "name": "Plan Next Step as KG",
+      "description": "Define the next development step or refactoring action as a new KG artifact (e.g., a plan-update.json or feature-plan.json).",
+      "precedes": "wf:step/SavePlanKG",
+      "produces": "artifact:new-plan-kg" // Placeholder for the new plan artifact type
+    },
+    {
+      "@id": "wf:step/SavePlanKG",
+      "@type": "wf:WorkflowStep",
+      "name": "Save Plan KG",
+      "description": "Save the newly created plan KG to a file within the kg/ directory.",
+      "precedes": "wf:step/ReviewPlanKG",
+      "persistsTo": "pf:File" // Indicates it results in a file artifact
+    },
+    {
+      "@id": "wf:step/ReviewPlanKG",
+      "@type": "wf:WorkflowStep",
+      "name": "Review Plan KG",
+      "description": "Review the newly saved plan KG file for accuracy and completeness.",
+      "precedes": "wf:step/RefinePlanKG",
+      "targets": "artifact:new-plan-kg" // Targets the conceptual plan artifact
+    },
+    {
+      "@id": "wf:step/RefinePlanKG",
+      "@type": "wf:WorkflowStep",
+      "name": "Refine Plan KG",
+      "description": "Iteratively modify the plan KG file based on the review, as needed.",
+      "isIterative": true,
+      "precedes": "wf:step/UpdateSystemStateKG", // Proceeds to update state *after* refinement loop
+      "modifies": "artifact:new-plan-kg" // Modifies the conceptual plan artifact
+      // Could add another precedes link back to ReviewPlanKG to explicitly model the loop
+    },
+    {
+      "@id": "wf:step/UpdateSystemStateKG",
+      "@type": "wf:WorkflowStep",
+      "name": "Update System State KG",
+      "description": "Update the system-state.json KG to reflect any changes made during the preceding steps.",
+      "triggerCondition": "Before every commit involving KG or related system changes.",
+      "modifies": "artifact:kg-system-state"
+      // This step implicitly precedes the actual git commit action.
+    },
+
+    // Referenced Artifact Types/Placeholders
+    { "@id": "artifact:kg-plan", "@type": "pf:Artifact", "name": "kg/plan.json" },
+    { "@id": "artifact:kg-meta-plan", "@type": "pf:Artifact", "name": "kg/meta-plan.json" },
+    { "@id": "artifact:kg-requirements", "@type": "pf:Artifact", "name": "kg/Requirements + Specification.json" },
+    { "@id": "artifact:kg-system-state", "@type": "pf:Artifact", "name": "kg/system-state.json" },
+    { "@id": "artifact:kg-registry", "@type": "pf:Artifact", "name": "kg/kg-registry.json" },
+    { "@id": "artifact:kg-review", "@type": "pf:Artifact", "name": "kg/review-kg-files.json" },
+    { "@id": "artifact:new-plan-kg", "@type": "pf:Artifact", "name": "New Plan KG (file varies)" },
+    { "@id": "pf:File", "@type": "rdfs:Class", "rdfs:label": "Physical File" }
+  ]
+} 

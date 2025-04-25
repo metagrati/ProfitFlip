@@ -99,6 +99,12 @@
        "@type": "pf:WorkflowPermission",
        "schema:name": "pull-requests: write",
        "schema:description": "Permission allowing workflow to create pull requests."
+    },
+    {
+      "@id": "file:workflow-kg-management",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/workflow-kg-management.json",
+      "schema:description": "Knowledge Graph defining the standard workflow for managing other KGs in this repository."
     }
   ]
 } 
