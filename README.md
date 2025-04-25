@@ -10,7 +10,7 @@ ProfitFlip is a CI-first project built around three uncompromising principles:
 
 + ![deadline](https://img.shields.io/date/1745697600.svg?label=deadline&color=critical&cacheSeconds=300)
 
-## �� Project Task Log
+##  Project Task Log
 
 Tracking progress against `plan-b2.yaml`.
 
@@ -102,6 +102,16 @@ This project relies on environment variables for configuration, especially for d
 
 *   **Secrets:** Sensitive information (API keys, tokens) must be configured as environment variables in your deployment environments (e.g., Fly.io secrets, Vercel environment variables).
 *   **Verification:** The `scripts/secrets-verify.ts` script (run via `pnpm run secrets:verify`) checks for the presence of required environment variables defined in its `REQUIRED_ENV` array during the CI process *before* deployment. Ensure all necessary variables are set in both Fly and Vercel environments to pass this check.
+
+---
+
+## 🤖 Automation
+
+This repository utilizes GitHub Actions for CI/CD and automation tasks.
+
+*   **Checklist Action (`.github/actions/tick-checklist`):** A custom JavaScript action that automatically marks items in the `docs/plan-b2.checklist.md` file as complete. 
+    *   It is triggered by the `ci-status.yml` workflow.
+    *   The workflow passes the specific checklist item text to the action upon successful completion of related steps (e.g., after `scripts/run-green-flag.sh` runs).
 
 ---
 
