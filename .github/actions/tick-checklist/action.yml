@@ -1,8 +1,8 @@
 name: Tick Checklist Item
 description: Mark a Markdown checklist item as done with audit trail.
 runs:
-  using: 'node16'
-  main: 'index.js'
+  using: 'node20'
+  main: 'dist/index.js'
 inputs:
   item:
     description: 'Exact text or unique substring of the checklist line'

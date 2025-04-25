@@ -12,8 +12,8 @@ jobs:
       - run: ./scripts/run-green-flag.sh
       - uses: ./.github/actions/tick-checklist
         with:
-          checklist-path: docs/plan-b2.checklist.md
-          items: |
+          path: docs/plan-b2.checklist.md
+          item: |
             P1 secrets-verify committed and green in CI
             Green-flag drill completed (`./scripts/run-green-flag.sh`)
       - uses: peter-evans/create-pull-request@v6
