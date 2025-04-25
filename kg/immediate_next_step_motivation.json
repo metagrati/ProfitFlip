@@ -1,0 +1,90 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "issue": "pf:issue/",
+    "analysis": "pf:analysis/",
+    "suggestion": "pf:suggestion/",
+    "repoSetting": "pf:repoSetting/",
+    "schema": "http://schema.org/",
+    "action": "pf:action/",
+    "workflow": "pf:workflow/",
+    "concept": "pf:concept/",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "identifiesIssue": { "@id": "pf:identifiesIssue", "@type": "@id" },
+    "providesAnalysis": { "@id": "pf:providesAnalysis", "@type": "@id" },
+    "offersSuggestion": { "@id": "pf:offersSuggestion", "@type": "@id", "@container": "@set" },
+    "affectsWorkflow": { "@id": "pf:affectsWorkflow", "@type": "@id" },
+    "failingStep": { "@id": "pf:failingStep", "@type": "@id" },
+    "relatedToAction": { "@id": "pf:relatedToAction", "@type": "@id" },
+    "likelyCause": { "@id": "pf:likelyCause", "@type": "@id", "@container": "@set" },
+    "suggestsAction": { "@id": "pf:suggestsAction" },
+    "relatesToSetting": { "@id": "pf:relatesToSetting", "@type": "@id" },
+    "verificationStep": { "@id": "pf:verificationStep" },
+    "confirmsCorrectnessOf": { "@id": "pf:confirmsCorrectnessOf", "@type": "@id" },
+    "pointsTo": { "@id": "pf:pointsTo", "@type": "@id"}
+  },
+  "@id": "pf:motivation/immediate_next_step_pr_perms_v1",
+  "@type": "pf:MotivationDocument",
+  "name": "Motivation for Next Step: Addressing PR Creation Permissions",
+  "describes": "Documents the issue, analysis, and suggested steps regarding GitHub Actions failing to create pull requests due to GITHUB_TOKEN permissions.",
+  "identifiesIssue": "issue:prCreationFailure",
+  "providesAnalysis": "analysis:prPermissionAnalysis",
+  "offersSuggestion": [
+    "suggestion:checkRepoSettings",
+    "suggestion:testWorkflow"
+  ],
+  "@graph": [
+    {
+      "@id": "issue:prCreationFailure",
+      "@type": "pf:WorkflowIssue",
+      "name": "Workflow Failure: Cannot Create Pull Request",
+      "describes": "The CI workflow fails at the step using the 'peter-evans/create-pull-request' action, reporting insufficient permissions for the GITHUB_TOKEN to create or approve pull requests.",
+      "affectsWorkflow": "workflow:ci-status",
+      "failingStep": {
+          "@type": "pf:WorkflowStepExecution",
+          "relatedToAction": "action:create-pull-request"
+      },
+       "likelyCause": ["concept:githubTokenPermissions", "repoSetting:actionsPermissions"]
+    },
+    {
+      "@id": "analysis:prPermissionAnalysis",
+      "@type": "pf:IssueAnalysis",
+      "name": "Analysis of PR Creation Failure",
+      "describes": "The root cause is likely insufficient permissions granted to the GITHUB_TOKEN, either directly in the workflow file (checked and seems correct with 'pull-requests: write') or via repository-level settings restricting token capabilities.",
+      "confirmsCorrectnessOf": {
+          "@id": "workflow:ci-status",
+          "relevantSection": "permissions: pull-requests: write"
+      },
+      "pointsTo": "repoSetting:actionsPermissions"
+    },
+    {
+      "@id": "suggestion:checkRepoSettings",
+      "@type": "pf:CorrectiveSuggestion",
+      "name": "Check Repository Action Settings",
+      "suggestsAction": "Navigate to Repository Settings -> Actions -> General. Ensure 'Workflow permissions' is set to 'Read and write permissions' and that 'Allow GitHub Actions to create and approve pull requests' is checked.",
+      "relatesToSetting": "repoSetting:actionsPermissions"
+    },
+    {
+      "@id": "suggestion:testWorkflow",
+      "@type": "pf:VerificationSuggestion",
+      "name": "Test Workflow",
+      "suggestsAction": "After verifying repository settings, re-run the workflow to confirm the issue is resolved.",
+      "verificationStep": "Re-run the failing GitHub Actions workflow."
+    },
+    {
+        "@id": "concept:githubTokenPermissions",
+        "@type": "pf:SecurityConcept",
+        "name": "GITHUB_TOKEN Permissions",
+        "describes": "Permissions granted to the temporary GITHUB_TOKEN used by workflow runs."
+    },
+    {
+        "@id": "repoSetting:actionsPermissions",
+        "@type": "pf:RepositorySetting",
+        "name": "Repository Actions Permissions",
+        "describes": "Settings within the GitHub repository that control the default permissions for GITHUB_TOKEN and whether actions can create PRs."
+    },
+    { "@id": "workflow:ci-status", "@type": "pf:Workflow" },
+    { "@id": "action:create-pull-request", "@type": "pf:GitHubActionUsage" }
+  ]
+} 

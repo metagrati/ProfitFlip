@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "plan": "pf:plan/",
+    "step": "pf:step/",
+    "issue": "pf:issue/",
+    "suggestion": "pf:suggestion/",
+    "repoSetting": "pf:repoSetting/",
+    "workflow": "pf:workflow/",
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "basedOnMotivation": { "@id": "pf:basedOnMotivation", "@type": "@id" },
+    "hasStep": { "@id": "pf:hasStep", "@type": "@id", "@container": "@list" },
+    "precedes": { "@id": "pf:precedes", "@type": "@id" },
+    "basedOnSuggestion": { "@id": "pf:basedOnSuggestion", "@type": "@id" },
+    "targets": { "@id": "pf:targets", "@type": "@id", "@container": "@set" },
+    "expectedOutcome": { "@id": "pf:expectedOutcome" },
+    "contingencyPlan": { "@id": "pf:contingencyPlan", "@type": "@id" },
+    "resolvesIssue": { "@id": "pf:resolvesIssue", "@type": "@id" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "plan:resolve_pr_permission_issue_v1",
+  "@type": "pf:ExecutionPlan",
+  "name": "Plan to Resolve GitHub Actions PR Permission Issue",
+  "describes": "Steps to verify and fix the GITHUB_TOKEN permission issue preventing pull request creation in the CI workflow.",
+  "created": "2025-07-24T11:35:00Z", 
+  "basedOnMotivation": "pf:motivation/immediate_next_step_pr_perms_v1",
+  "hasStep": [
+    "step:verifyRepoSettings",
+    "step:triggerWorkflow",
+    "step:monitorWorkflow",
+    "step:evaluateOutcome"
+  ],
+  "@graph": [
+    {
+      "@id": "step:verifyRepoSettings",
+      "@type": "pf:PlanStep",
+      "name": "Verify Repository Settings",
+      "describes": "Check GitHub repository settings (Actions -> General) to ensure 'Workflow permissions' is set to 'Read and write permissions' and 'Allow GitHub Actions to create and approve pull requests' is checked.",
+      "basedOnSuggestion": "suggestion:checkRepoSettings",
+      "targets": "repoSetting:actionsPermissions",
+      "precedes": "step:triggerWorkflow",
+      "expectedOutcome": "Repository settings are confirmed to allow PR creation by Actions, or corrected if necessary."
+    },
+    {
+      "@id": "step:triggerWorkflow",
+      "@type": "pf:PlanStep",
+      "name": "Trigger Workflow Execution",
+      "describes": "Manually trigger the 'ci-status.yml' workflow (e.g., via workflow_dispatch if configured) or push a commit to the relevant branch to initiate it.",
+      "basedOnSuggestion": "suggestion:testWorkflow",
+      "targets": "workflow:ci-status",
+      "precedes": "step:monitorWorkflow",
+      "expectedOutcome": "The 'ci-status.yml' workflow starts a new run."
+    },
+    {
+      "@id": "step:monitorWorkflow",
+      "@type": "pf:PlanStep",
+      "name": "Monitor Workflow Run",
+      "describes": "Observe the triggered workflow run in the GitHub Actions tab, specifically monitoring the 'Create Pull Request' step for success or failure messages.",
+      "targets": "workflow:ci-status", 
+      "precedes": "step:evaluateOutcome",
+      "expectedOutcome": "Workflow run completes, providing clear logs and status (success/failure) for the 'create-pull-request' step."
+    },
+    {
+      "@id": "step:evaluateOutcome",
+      "@type": "pf:DecisionStep", 
+      "name": "Evaluate Workflow Outcome",
+      "describes": "Assess if the 'Create Pull Request' step succeeded based on the workflow logs. If yes, the primary issue is considered resolved. If no, proceed to the contingency plan.",
+      "expectedOutcome": "A clear determination of whether the permission fix was successful.",
+      "resolvesIssue": { 
+          "@type": "pf:ConditionalOutcome",
+          "condition": "Workflow 'Create Pull Request' step succeeds",
+          "result": "issue:prCreationFailure"
+      },
+      "contingencyPlan": "step:furtherInvestigation" 
+    },
+    {
+      "@id": "step:furtherInvestigation", 
+      "@type": "pf:PlanStep",
+      "name": "Further Investigation (Contingency)",
+      "describes": "If the workflow still fails after verifying repository settings, analyze detailed logs from the 'Create Pull Request' step, check action inputs, token scopes, branch protection rules, or other potential conflicts.",
+      "expectedOutcome": "Identification of the alternative root cause for the failure."
+    },
+    { "@id": "pf:motivation/immediate_next_step_pr_perms_v1" },
+    { "@id": "suggestion:checkRepoSettings" },
+    { "@id": "suggestion:testWorkflow" },
+    { "@id": "repoSetting:actionsPermissions" },
+    { "@id": "workflow:ci-status" },
+    { "@id": "issue:prCreationFailure" }
+  ]
+} 

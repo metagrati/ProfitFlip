@@ -105,6 +105,19 @@
       "@type": ["pf:File", "pf:KnowledgeGraph", "schema:SoftwareSourceCode"],
       "schema:name": "kg/workflow-kg-management.json",
       "schema:description": "Knowledge Graph defining the standard workflow for managing other KGs in this repository."
+    },
+    {
+      "@id": "file:motivation-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/immediate_next_step_motivation.json",
+      "schema:description": "KG documenting the motivation (issue, analysis, suggestions) for addressing the PR permission failure."
+    },
+    {
+      "@id": "file:plan-resolve-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/immediate_next_step_plan.json",
+      "schema:description": "KG outlining the plan to resolve the PR permission failure, based on the motivation KG.",
+      "pf:basedOnMotivation": "file:motivation-pr-perms"
     }
   ]
 } 
