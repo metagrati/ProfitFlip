@@ -1,0 +1,9 @@
+﻿2025-04-25T15:25:18.0663488Z ##[group]Run npm i -g pnpm
+2025-04-25T15:25:18.0664945Z [36;1mnpm i -g pnpm[0m
+2025-04-25T15:25:18.0703549Z shell: /usr/bin/bash -e {0}
+2025-04-25T15:25:18.0704787Z ##[endgroup]
+2025-04-25T15:25:19.3041954Z 
+2025-04-25T15:25:19.3050921Z added 1 package in 1s
+2025-04-25T15:25:19.3051295Z 
+2025-04-25T15:25:19.3051677Z 1 package is looking for funding
+2025-04-25T15:25:19.3052276Z   run `npm fund` for details
