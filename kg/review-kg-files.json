@@ -1,0 +1,92 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "meta": "https://profitflip.io/meta#",
+    "artifact": "pf:artifact/",
+    "person": "pf:person/",
+    "schema": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hasFinding": { "@id": "meta:hasFinding", "@type": "@id", "@container": "@set" },
+    "affectsArtifact": { "@id": "meta:affectsArtifact", "@type": "@id", "@container": "@set" },
+    "severity": { "@id": "meta:severity" }, 
+    "description": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" },
+    "createdBy": { "@id": "meta:createdBy", "@type": "@id" }
+  },
+  "@id": "meta:Review_KG_Files_v1",
+  "@type": "meta:Review",
+  "name": "Review of Knowledge Graph Files (July 24, 2025)",
+  "created": "2025-07-24T10:20:00Z",
+  "createdBy": "person:ai-assistant", 
+  "hasFinding": [
+    "meta:finding/redundant-meta-kgs",
+    "meta:finding/redundant-person-def",
+    "meta:finding/meta-plan-necessity",
+    "meta:finding/plan-detail-maintenance",
+    "meta:finding/potential-future-splits"
+  ],
+  "@graph": [
+    {
+      "@id": "meta:finding/redundant-meta-kgs",
+      "@type": "meta:Finding",
+      "description": "Creating separate meta-KG files for each primary KG adds complexity and potential redundancy. Consider a single KG registry file instead.",
+      "severity": "Medium",
+      "affectsArtifact": [
+        "artifact:meta-kg-plan",
+        "artifact:meta-kg-meta-plan",
+        "artifact:meta-kg-requirements",
+        "artifact:meta-kg-system-state"
+      ]
+    },
+    {
+      "@id": "meta:finding/redundant-person-def",
+      "@type": "meta:Finding",
+      "description": "The 'person:ai-assistant' node is defined identically and redundantly in multiple meta-KG files. Define common entities centrally.",
+      "severity": "Low",
+      "affectsArtifact": [
+        "artifact:meta-kg-plan",
+        "artifact:meta-kg-meta-plan",
+        "artifact:meta-kg-requirements",
+        "artifact:meta-kg-system-state"
+      ]
+    },
+    {
+      "@id": "meta:finding/meta-plan-necessity",
+      "@type": "meta:Finding",
+      "description": "The necessity of meta-plan.json depends on the process. If KG meta-tracking is not rigorously followed, this file might become overhead and could be merged or simplified.",
+      "severity": "Low",
+      "affectsArtifact": "artifact:kg-meta-plan"
+    },
+    {
+      "@id": "meta:finding/plan-detail-maintenance",
+      "@type": "meta:Finding",
+      "description": "The detailed tracking fields in plan.json (eta, timeSpent) require strict maintenance to avoid becoming inaccurate or exaggerated representations of progress.",
+      "severity": "Suggestion",
+      "affectsArtifact": "artifact:kg-plan"
+    },
+    {
+      "@id": "meta:finding/potential-future-splits",
+      "@type": "meta:Finding",
+      "description": "plan.json and Requirements + Specification.json are currently manageable but have the potential to grow. Consider splitting them (e.g., by Epic, or Req Type) if they become too large.",
+      "severity": "Suggestion",
+      "affectsArtifact": [
+         "artifact:kg-plan",
+         "artifact:kg-requirements"
+      ]
+    },
+    {
+      "@id": "person:ai-assistant", 
+      "@type": ["pf:Role", "schema:Person"], 
+      "name": "AI Assistant (Gemini)"
+    },
+    { "@id": "artifact:kg-plan", "@type": "pf:Artifact", "name": "kg/plan.json" },
+    { "@id": "artifact:kg-meta-plan", "@type": "pf:Artifact", "name": "kg/meta-plan.json" },
+    { "@id": "artifact:kg-requirements", "@type": "pf:Artifact", "name": "kg/Requirements + Specification.json" },
+    { "@id": "artifact:kg-system-state", "@type": "pf:Artifact", "name": "kg/system-state.json" },
+    { "@id": "artifact:meta-kg-plan", "@type": "pf:Artifact", "name": "kg/meta-kg-plan.json" },
+    { "@id": "artifact:meta-kg-meta-plan", "@type": "pf:Artifact", "name": "kg/meta-kg-meta-plan.json" },
+    { "@id": "artifact:meta-kg-requirements", "@type": "pf:Artifact", "name": "kg/meta-kg-requirements.json" },
+    { "@id": "artifact:meta-kg-system-state", "@type": "pf:Artifact", "name": "kg/meta-kg-system-state.json" }
+  ]
+} 

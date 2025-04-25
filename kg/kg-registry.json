@@ -1,0 +1,84 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "meta": "https://profitflip.io/meta#",
+    "artifact": "pf:artifact/",
+    "person": "pf:person/",
+    "schema": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hasArtifact": { "@id": "meta:hasArtifact", "@type": "@id", "@container": "@set" },
+    "status": { "@id": "meta:status" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" },
+    "createdBy": { "@id": "meta:createdBy", "@type": "@id" },
+    "usesVocabulary": { "@id": "meta:usesVocabulary", "@type": "@id", "@container": "@set" },
+    "encodingFormat": { "@id": "schema:encodingFormat" },
+    "description": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" }
+  },
+  "@id": "meta:KG_Registry_v1",
+  "@type": "meta:KGRegistry",
+  "name": "Knowledge Graph Registry",
+  "description": "Central registry describing the purpose and status of all KG files in the /kg directory.",
+  "created": "2025-07-24T10:30:00Z",
+  "createdBy": "person:ai-assistant",
+  "hasArtifact": [
+    "artifact:kg-plan",
+    "artifact:kg-meta-plan",
+    "artifact:kg-requirements",
+    "artifact:kg-system-state",
+    "artifact:kg-review"
+  ],
+  "@graph": [
+    {
+      "@id": "artifact:kg-plan",
+      "@type": ["pf:Artifact", "schema:Dataset"],
+      "name": "kg/plan.json",
+      "description": "Knowledge Graph defining the project roadmap, epics, tasks, roles, people, and generated artifacts.",
+      "encodingFormat": "application/ld+json",
+      "status": "Active",
+      "usesVocabulary": ["pf:", "road:", "xsd:", "schema:"]
+    },
+    {
+      "@id": "artifact:kg-meta-plan",
+      "@type": ["pf:Artifact", "schema:Dataset"],
+      "name": "kg/meta-plan.json",
+      "description": "Knowledge Graph tracking meta-level suggestions and tasks related to the KG process itself.",
+      "encodingFormat": "application/ld+json",
+      "status": "Active", 
+      "usesVocabulary": ["pf:", "meta:", "xsd:", "schema:"]
+    },
+    {
+      "@id": "artifact:kg-requirements",
+      "@type": ["pf:Artifact", "schema:Dataset"],
+      "name": "kg/Requirements + Specification.json",
+      "description": "Knowledge Graph defining functional requirements, non-functional requirements, system components, and their relationships.",
+      "encodingFormat": "application/ld+json",
+      "status": "Active",
+      "usesVocabulary": ["pf:", "req:", "nfr:", "comp:", "risk:", "metric:", "schema:"]
+    },
+    {
+      "@id": "artifact:kg-system-state",
+      "@type": ["pf:Artifact", "schema:Dataset"],
+      "name": "kg/system-state.json",
+      "description": "Knowledge Graph describing the current state of key system components like workflows, actions, and related files.",
+      "encodingFormat": "application/ld+json",
+      "status": "InitialDraft",
+      "usesVocabulary": ["pf:", "schema:"]
+    },
+    {
+      "@id": "artifact:kg-review",
+      "@type": ["pf:Artifact", "schema:Dataset"],
+      "name": "kg/review-kg-files.json",
+      "description": "Knowledge Graph containing review findings for the other KG files.",
+      "encodingFormat": "application/ld+json",
+      "status": "Active",
+      "usesVocabulary": ["pf:", "meta:", "schema:", "xsd:"]
+    },
+    {
+       "@id": "person:ai-assistant",
+       "@type": ["pf:Role", "schema:Person"], 
+       "name": "AI Assistant (Gemini)",
+       "description": "AI responsible for assisting with KG generation and updates."
+    }
+  ]
+} 
