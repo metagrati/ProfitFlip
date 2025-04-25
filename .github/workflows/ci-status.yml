@@ -1,5 +1,7 @@
 name: CI Status
 on: [push, pull_request]
+permissions:
+  contents: write
 jobs:
   progress:
     if: ${{ github.actor != 'github-actions[bot]' }}
