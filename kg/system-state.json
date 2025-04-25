@@ -118,6 +118,34 @@
       "schema:name": "kg/immediate_next_step_plan.json",
       "schema:description": "KG outlining the plan to resolve the PR permission failure, based on the motivation KG.",
       "pf:basedOnMotivation": "file:motivation-pr-perms"
+    },
+    {
+      "@id": "file:result-resolve-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/immediate_next_step_result.json",
+      "schema:description": "KG documenting the failed outcome of the plan to resolve the PR permission failure.",
+      "pf:outcomeOfPlan": "file:plan-resolve-pr-perms"
+    },
+    {
+      "@id": "file:motivation-investigate-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/next_step_motivation_pr_investigation.json",
+      "schema:description": "KG documenting the motivation for investigating the PR permission failure after the initial plan failed.",
+      "pf:basedOnResult": "file:result-resolve-pr-perms"
+    },
+    {
+      "@id": "file:plan-investigate-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/next_step_plan_pr_investigation.json",
+      "schema:description": "KG outlining the detailed plan to investigate the PR permission failure.",
+      "pf:basedOnMotivation": "file:motivation-investigate-pr-perms"
+    },
+    {
+      "@id": "file:result-trigger-failed-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/result_workflow_trigger_failed.json",
+      "schema:description": "KG documenting the failed outcome of re-triggering the workflow to test PR permissions.",
+      "pf:outcomeOfPlan": "file:plan-resolve-pr-perms"
     }
   ]
 } 

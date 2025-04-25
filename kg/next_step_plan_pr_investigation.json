@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "plan": "pf:plan/",
+    "step": "pf:step/",
+    "motivation": "pf:motivation/",
+    "log": "pf:log/",
+    "workflow": "pf:workflow/",
+    "action": "pf:action/",
+    "repoSetting": "pf:repoSetting/", 
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "basedOnMotivation": { "@id": "pf:basedOnMotivation", "@type": "@id" },
+    "hasStep": { "@id": "pf:hasStep", "@type": "@id", "@container": "@list" },
+    "precedes": { "@id": "pf:precedes", "@type": "@id" },
+    "targets": { "@id": "pf:targets", "@type": "@id", "@container": "@set" },
+    "expectedOutcome": { "@id": "pf:expectedOutcome" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "plan:investigate_pr_permission_failure_v1",
+  "@type": "pf:ExecutionPlan",
+  "name": "Plan to Investigate PR Permission Failure Root Cause",
+  "describes": "Detailed steps to investigate the root cause of the persistent 'create-pull-request' failure, activating the contingency plan.",
+  "created": "2025-07-24T12:11:00Z", 
+  "basedOnMotivation": "motivation:investigate_pr_permission_failure_v1",
+  "hasStep": [
+    "step:analyzeDetailedLogs",
+    "step:reviewWorkflowInputs",
+    "step:checkBranchProtection",
+    "step:considerOtherFactors"
+  ],
+  "@graph": [
+    {
+      "@id": "step:analyzeDetailedLogs",
+      "@type": "pf:PlanStep",
+      "name": "Analyze Detailed Workflow Logs",
+      "describes": "Examine the step-specific logs for the 'peter-evans/create-pull-request' action within the failed workflow run (potentially in output_logs/logs/progress/). Look for more specific error messages, context, or underlying API call failures.",
+      "targets": { "@id": "pf:LogFileSet", "pf:pathPattern": "output_logs/logs/progress/*_Create Pull Request*.txt" },
+      "precedes": "step:reviewWorkflowInputs",
+      "expectedOutcome": "Identification of more specific error messages or clues within the action's detailed logs."
+    },
+    {
+      "@id": "step:reviewWorkflowInputs",
+      "@type": "pf:PlanStep",
+      "name": "Review Workflow Inputs",
+      "describes": "Carefully review the inputs provided to the 'peter-evans/create-pull-request@v6' action in '.github/workflows/ci-status.yml'. Verify branch names, commit messages, titles, and token usage.",
+      "targets": "workflow:ci-status", 
+      "precedes": "step:checkBranchProtection",
+      "expectedOutcome": "Confirmation that all inputs to the action are correct and match expected values."
+    },
+    {
+      "@id": "step:checkBranchProtection",
+      "@type": "pf:PlanStep",
+      "name": "Check Branch Protection Rules",
+      "describes": "Review the branch protection rules configured for the 'main' branch in the repository settings. Look for rules that might restrict pushes or PR creations specifically from the GITHUB_TOKEN or the 'github-actions[bot]' user.",
+      "targets": "repoSetting:branchProtectionMain", 
+      "precedes": "step:considerOtherFactors",
+      "expectedOutcome": "Identification of any branch protection rules interfering with the action's ability to create the PR."
+    },
+     {
+      "@id": "step:considerOtherFactors",
+      "@type": "pf:PlanStep",
+      "name": "Consider Other Factors",
+      "describes": "Investigate other potential conflicts, such as organizational policies restricting Actions permissions, interactions with other actions in the workflow, or temporary GitHub platform issues.",
+      "expectedOutcome": "Identification of less common configuration issues or external factors contributing to the failure."
+    },
+    { "@id": "motivation:investigate_pr_permission_failure_v1" },
+    { "@id": "workflow:ci-status" },
+    { "@id": "repoSetting:branchProtectionMain", "@type": "pf:RepositorySetting", "name": "Branch Protection Rules (main)" }
+  ]
+} 

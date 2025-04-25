@@ -238,3 +238,5 @@ docker compose restart db
 | `make sync` | Uploads bash-vault + generated docs to the remote scripts bucket | After editing scripts |
 
 (*If your local `make` output differs, sync this table with the recipes in `Makefile`.*)
+
+<!-- Workflow Trigger: 2025-07-24T12:15:00Z -->

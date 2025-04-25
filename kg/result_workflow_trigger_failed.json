@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "result": "pf:result/",
+    "plan": "pf:plan/",
+    "step": "pf:step/",
+    "issue": "pf:issue/",
+    "log": "pf:log/",
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "outcomeOfPlan": { "@id": "pf:outcomeOfPlan", "@type": "@id" },
+    "planStatus": { "@id": "pf:planStatus" },
+    "stepOutcome": { "@id": "pf:stepOutcome", "@type": "@id", "@container": "@list" },
+    "outcomeStatus": { "@id": "pf:outcomeStatus" },
+    "relevantLogEntry": { "@id": "pf:relevantLogEntry", "@type": "@id" },
+    "persistedIssue": { "@id": "pf:persistedIssue", "@type": "@id" },
+    "logFile": { "@id": "pf:logFile", "@type": "@id" },
+    "lineNumber": { "@id": "pf:lineNumber", "@type": "xsd:integer" },
+    "logTimestamp": { "@id": "pf:logTimestamp", "@type": "xsd:dateTime" },
+    "logContent": { "@id": "pf:logContent" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "result:workflow_trigger_failed_pr_perms_v1",
+  "@type": "pf:PlanResult", 
+  "name": "Result of Retriggering Workflow After Settings Change",
+  "describes": "Documents the outcome of re-triggering the CI workflow after adjusting repository settings. The plan failed as the PR creation error persisted.",
+  "outcomeOfPlan": "plan:resolve_pr_permission_issue_v1", 
+  "planStatus": "Failed",
+  "created": "2025-07-24T12:25:00Z", 
+  "stepOutcome": [
+    {
+      "@id": "result:step/retriggerOutcome",
+      "@type": "pf:StepOutcome",
+      "outcomeOfStep": ["step:triggerWorkflow", "step:monitorWorkflow", "step:evaluateOutcome"], 
+      "outcomeStatus": "Failed",
+      "describes": "Workflow was triggered by a commit, but the 'Create Pull Request' step failed again with the same permission error.",
+      "relevantLogEntry": "log:prCreateFailureEntryRepeat",
+      "persistedIssue": "issue:prCreationFailure"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "log:prCreateFailureEntryRepeat",
+      "@type": "pf:LogEntry",
+      "logFile": { "@id": "pf:file/output_logs/logs/0_progress.txt" }, 
+      "lineNumber": 321, // Approximate line number from latest log
+      "logTimestamp": "2025-04-25T15:48:25.8294974Z",
+      "logContent": "##[error]GitHub Actions is not permitted to create or approve pull requests."
+    },
+    // Reference the plan that this result corresponds to
+    { "@id": "plan:resolve_pr_permission_issue_v1" }, 
+    // Reference the steps from that plan
+    { "@id": "step:triggerWorkflow" },
+    { "@id": "step:monitorWorkflow" },
+    { "@id": "step:evaluateOutcome" },
+    // Reference the issue that still persists
+    { "@id": "issue:prCreationFailure" } 
+  ]
+} 

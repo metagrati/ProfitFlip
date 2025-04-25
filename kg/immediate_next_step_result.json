@@ -1,0 +1,67 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "result": "pf:result/",
+    "plan": "pf:plan/",
+    "step": "pf:step/",
+    "issue": "pf:issue/",
+    "log": "pf:log/",
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "outcomeOfPlan": { "@id": "pf:outcomeOfPlan", "@type": "@id" },
+    "planStatus": { "@id": "pf:planStatus" },
+    "stepOutcome": { "@id": "pf:stepOutcome", "@type": "@id", "@container": "@list" },
+    "outcomeStatus": { "@id": "pf:outcomeStatus" },
+    "relevantLogEntry": { "@id": "pf:relevantLogEntry", "@type": "@id" },
+    "persistedIssue": { "@id": "pf:persistedIssue", "@type": "@id" },
+    "logFile": { "@id": "pf:logFile", "@type": "@id" },
+    "lineNumber": { "@id": "pf:lineNumber", "@type": "xsd:integer" },
+    "logTimestamp": { "@id": "pf:logTimestamp", "@type": "xsd:dateTime" },
+    "logContent": { "@id": "pf:logContent" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "result:resolve_pr_permission_issue_v1_outcome",
+  "@type": "pf:PlanResult",
+  "name": "Result of Plan to Resolve GitHub Actions PR Permission Issue",
+  "describes": "Documents the outcome of executing the plan (plan:resolve_pr_permission_issue_v1). The plan failed as the core issue persisted.",
+  "outcomeOfPlan": "plan:resolve_pr_permission_issue_v1",
+  "planStatus": "Failed",
+  "created": "2025-07-24T11:55:00Z", 
+  "stepOutcome": [
+    {
+      "@id": "result:step/verifyRepoSettingsOutcome",
+      "@type": "pf:StepOutcome",
+      "outcomeOfStep": "step:verifyRepoSettings",
+      "outcomeStatus": "Completed",
+      "describes": "Repository settings were assumed to be verified/corrected by the user as per the plan."
+    },
+    {
+      "@id": "result:step/triggerAndMonitorOutcome",
+      "@type": "pf:StepOutcome",
+      "outcomeOfStep": ["step:triggerWorkflow", "step:monitorWorkflow", "step:evaluateOutcome"], 
+      "outcomeStatus": "Failed",
+      "describes": "Workflow triggered, but the 'Create Pull Request' step failed during execution.",
+      "relevantLogEntry": "log:prCreateFailureEntry",
+      "persistedIssue": "issue:prCreationFailure"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "log:prCreateFailureEntry",
+      "@type": "pf:LogEntry",
+      "logFile": { "@id": "pf:file/output_logs/logs/0_progress.txt" },
+      "lineNumber": 341, 
+      "logTimestamp": "2025-04-25T15:25:23.3415403Z",
+      "logContent": "##[error]GitHub Actions is not permitted to create or approve pull requests."
+    },
+    { "@id": "plan:resolve_pr_permission_issue_v1" },
+    { "@id": "step:verifyRepoSettings" },
+    { "@id": "step:triggerWorkflow" },
+    { "@id": "step:monitorWorkflow" },
+    { "@id": "step:evaluateOutcome" },
+    { "@id": "issue:prCreationFailure" }
+  ]
+} 
