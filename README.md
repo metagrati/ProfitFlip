@@ -109,6 +109,7 @@ This project relies on environment variables for configuration, especially for d
 
 This repository utilizes GitHub Actions for CI/CD and automation tasks.
 
+*   **Workflow Permissions:** The primary workflow (`ci-status.yml`) requires `contents: write` permissions. This is necessary to allow the `peter-evans/create-pull-request` action to push the `progress-bot/` branch when creating PRs for checklist updates.
 *   **Checklist Action (`.github/actions/tick-checklist`):** A custom JavaScript action that automatically marks items in the `docs/plan-b2.checklist.md` file as complete. 
     *   It is triggered by the `ci-status.yml` workflow.
     *   The workflow passes the specific checklist item text to the action upon successful completion of related steps (e.g., after `scripts/run-green-flag.sh` runs).
