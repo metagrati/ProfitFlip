@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "motivation": "pf:motivation/",
+    "issue": "pf:issue/",
+    "analysis": "pf:analysis/",
+    "suggestion": "pf:suggestion/",
+    "result": "pf:result/",
+    "plan": "pf:plan/",
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "basedOnResult": { "@id": "pf:basedOnResult", "@type": "@id", "@container": "@set"},
+    "identifiesIssue": { "@id": "pf:identifiesIssue", "@type": "@id" },
+    "providesAnalysis": { "@id": "pf:providesAnalysis", "@type": "@id" },
+    "offersSuggestion": { "@id": "pf:offersSuggestion", "@type": "@id" },
+    "referencesPlan": { "@id": "pf:referencesPlan", "@type": "@id" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "motivation:enable_debug_logs_pr_perms_v1",
+  "@type": "pf:MotivationDocument",
+  "name": "Motivation for Enabling Debug Logs for PR Permission Issue",
+  "describes": "Documents the need to enable GitHub Actions debug logging to get more detailed error information for the persistent PR creation failure, after standard checks yielded no clear cause.",
+  "created": "2025-07-24T12:40:00Z",
+  "basedOnResult": [
+      "result:resolve_pr_permission_issue_v1_outcome",
+      "result:workflow_trigger_failed_pr_perms_v1"
+   ],
+  "identifiesIssue": "issue:prCreationFailureObscureRootCause",
+  "providesAnalysis": "analysis:needEnhancedObservability",
+  "offersSuggestion": "suggestion:enableStepDebugLogging",
+  "@graph": [
+    {
+      "@id": "issue:prCreationFailureObscureRootCause",
+      "@type": "pf:WorkflowIssue",
+      "name": "PR Creation Failure - Obscure Root Cause",
+      "describes": "Standard configuration checks (workflow permissions, repo settings, inputs, branch protection) have not revealed the specific reason for the 'GitHub Actions is not permitted to create or approve pull requests' error.",
+       "basedOnResult": [
+          "result:resolve_pr_permission_issue_v1_outcome",
+          "result:workflow_trigger_failed_pr_perms_v1"
+       ]
+    },
+    {
+      "@id": "analysis:needEnhancedObservability",
+      "@type": "pf:IssueAnalysis",
+      "name": "Need for Enhanced Observability",
+      "describes": "The current level of logging is insufficient to diagnose the problem. Enabling debug logging is required to potentially expose underlying API errors or more detailed permission messages.",
+      "referencesPlan": "plan:investigate_pr_permission_failure_v1"
+    },
+    {
+      "@id": "suggestion:enableStepDebugLogging",
+      "@type": "pf:CorrectiveSuggestion",
+      "name": "Enable Step Debug Logging",
+      "suggestsAction": "Add the ACTIONS_STEP_DEBUG secret to the repository or organization and set it to true to enable verbose logging for workflow steps."
+    },
+    { "@id": "result:resolve_pr_permission_issue_v1_outcome" },
+    { "@id": "result:workflow_trigger_failed_pr_perms_v1" },
+    { "@id": "plan:investigate_pr_permission_failure_v1" }
+  ]
+} 

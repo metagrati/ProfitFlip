@@ -146,6 +146,20 @@
       "schema:name": "kg/result_workflow_trigger_failed.json",
       "schema:description": "KG documenting the failed outcome of re-triggering the workflow to test PR permissions.",
       "pf:outcomeOfPlan": "file:plan-resolve-pr-perms"
+    },
+    {
+      "@id": "file:motivation-enable-debug-logs",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/motivation_enable_debug_logs.json",
+      "schema:description": "KG documenting the motivation for enabling debug logs to investigate the PR permission failure.",
+      "pf:basedOnResult": ["file:result-resolve-pr-perms", "file:result-trigger-failed-pr-perms"]
+    },
+    {
+      "@id": "file:plan-enable-debug-logs",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/plan_enable_debug_logs.json",
+      "schema:description": "KG outlining the plan to enable and analyze debug logs for the PR permission failure.",
+      "pf:basedOnMotivation": "file:motivation-enable-debug-logs"
     }
   ]
 } 

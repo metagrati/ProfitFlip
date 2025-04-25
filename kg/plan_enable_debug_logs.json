@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "plan": "pf:plan/",
+    "step": "pf:step/",
+    "motivation": "pf:motivation/",
+    "workflow": "pf:workflow/",
+    "repoSetting": "pf:repoSetting/",
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "basedOnMotivation": { "@id": "pf:basedOnMotivation", "@type": "@id" },
+    "hasStep": { "@id": "pf:hasStep", "@type": "@id", "@container": "@list" },
+    "precedes": { "@id": "pf:precedes", "@type": "@id" },
+    "targets": { "@id": "pf:targets", "@type": "@id", "@container": "@set" },
+    "expectedOutcome": { "@id": "pf:expectedOutcome" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "plan:enable_debug_logs_pr_perms_v1",
+  "@type": "pf:ExecutionPlan",
+  "name": "Plan to Enable and Analyze Debug Logs for PR Permission Issue",
+  "describes": "Steps to enable GitHub Actions step debug logging, re-run the workflow, and analyze the verbose logs for the root cause of the PR creation failure.",
+  "created": "2025-07-24T12:41:00Z",
+  "basedOnMotivation": "motivation:enable_debug_logs_pr_perms_v1",
+  "hasStep": [
+    "step:setDebugSecret",
+    "step:triggerWorkflowWithDebug",
+    "step:analyzeDebugLogs",
+    "step:documentDebugFindings"
+  ],
+  "@graph": [
+    {
+      "@id": "step:setDebugSecret",
+      "@type": "pf:PlanStep",
+      "name": "Set ACTIONS_STEP_DEBUG Secret",
+      "describes": "In the GitHub repository settings (Settings -> Secrets and variables -> Actions), add a new repository secret named 'ACTIONS_STEP_DEBUG' and set its value to 'true'. This enables verbose debug logging for all steps in subsequent workflow runs.",
+      "targets": "repoSetting:actionsSecrets",
+      "precedes": "step:triggerWorkflowWithDebug",
+      "expectedOutcome": "The ACTIONS_STEP_DEBUG secret is created and set to true."
+    },
+    {
+      "@id": "step:triggerWorkflowWithDebug",
+      "@type": "pf:PlanStep",
+      "name": "Trigger Workflow Execution with Debugging",
+      "describes": "Trigger the 'ci-status.yml' workflow again (e.g., via a minor commit/push) to generate logs with debug output enabled.",
+      "targets": "workflow:ci-status",
+      "precedes": "step:analyzeDebugLogs",
+      "expectedOutcome": "A new workflow run completes, generating logs with detailed step debug information."
+    },
+    {
+      "@id": "step:analyzeDebugLogs",
+      "@type": "pf:PlanStep",
+      "name": "Analyze Debug Logs",
+      "describes": "Download the logs for the new workflow run. Specifically examine the detailed logs for the 'Run peter-evans/create-pull-request' step. Look for specific API error messages, permission details, HTTP status codes, or any other clues not present in the standard logs.",
+      "targets": { "@id": "pf:LogFileSet", "pf:pathPattern": "downloaded_debug_logs/*_Run peter-evans_create-pull-request*.txt" },
+      "precedes": "step:documentDebugFindings",
+      "expectedOutcome": "Identification of the specific underlying error or condition causing the permission failure, or confirmation that debug logs provide no additional clues."
+    },
+    {
+      "@id": "step:documentDebugFindings",
+      "@type": "pf:PlanStep",
+      "name": "Document Debug Findings",
+      "describes": "Create a new result KG documenting the findings from the debug log analysis (whether successful in identifying the cause or not).",
+      "expectedOutcome": "A result KG file detailing the analysis of the debug logs."
+    },
+    { "@id": "motivation:enable_debug_logs_pr_perms_v1" },
+    { "@id": "workflow:ci-status" },
+    { "@id": "repoSetting:actionsSecrets", "@type": "pf:RepositorySetting", "name": "Repository Actions Secrets" }
+  ]
+} 
