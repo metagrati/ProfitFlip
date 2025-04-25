@@ -1,7 +1,7 @@
 # Plan B⁗.2 — progress tracker
 
 ## Patches
-- [ ] P1 secrets-verify committed and green in CI
+- [x] P1 secrets-verify committed and green in CI <!-- done-by @metagrati at 2025-04-25 16:00 -->
 - [ ] P2 Fly cold-start guard merged
 - [ ] P3 entrypoint.sh idempotent migrations
 - [ ] P4 demo wallet pre-fund
