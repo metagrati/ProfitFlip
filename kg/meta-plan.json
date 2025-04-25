@@ -1,0 +1,114 @@
+{
+    "@context": {
+        "pf": "https://profitflip.io/kg/v1#",
+        "meta": "https://profitflip.io/meta#",
+        "rev": "meta:review/",
+        "sug": "meta:suggestion/",
+        "task": "meta:task/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "hasSuggestion": {
+            "@id": "meta:hasSuggestion",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "affectsTask": {
+            "@id": "meta:affectsTask",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "status": {
+            "@id": "meta:status"
+        },
+        "priority": {
+            "@id": "meta:priority",
+            "@type": "xsd:integer"
+        },
+        "created": {
+            "@id": "meta:created",
+            "@type": "xsd:dateTime"
+        },
+        "resolvedBy": {
+            "@id": "meta:resolvedBy",
+            "@type": "@id",
+            "@container": "@set"
+        }
+    },
+    "@id": "meta:Review_Register_v1",
+    "@type": "meta:ReviewRegister",
+    "rdfs:label": "Review Register – ProfitFlip Ontology & Roadmap",
+    "created": "2025-04-25T17:45:00+03:00",
+    "hasSuggestion": [
+        "sug:std_terms",
+        "sug:type_property",
+        "sug:shacl_validation",
+        "sug:embed_vs_uri",
+        "sug:schema_scope"
+    ],
+    "sug:std_terms": {
+        "@id": "sug:std_terms",
+        "@type": "meta:Suggestion",
+        "rdfs:comment": "Replace custom meta:domain/range/inverseOf with rdfs:domain, rdfs:range, owl:inverseOf.",
+        "status": "Accepted",
+        "priority": 1,
+        "created": "2025-04-25T17:46:00+03:00",
+        "affectsTask": [
+            "task:2_map",
+            "task:3_convert"
+        ],
+        "resolvedBy": [
+            "task:2_map",
+            "task:3_convert"
+        ]
+    },
+    "sug:type_property": {
+        "@id": "sug:type_property",
+        "@type": "meta:Suggestion",
+        "rdfs:comment": "Type predicates as rdf:Property (or owl:ObjectProperty / DatatypeProperty) instead of custom pf:Predicate.",
+        "status": "Accepted",
+        "priority": 1,
+        "created": "2025-04-25T17:46:30+03:00",
+        "affectsTask": [
+            "task:2_map",
+            "task:3_convert"
+        ],
+        "resolvedBy": [
+            "task:3_convert"
+        ]
+    },
+    "sug:shacl_validation": {
+        "@id": "sug:shacl_validation",
+        "@type": "meta:Suggestion",
+        "rdfs:comment": "Introduce SHACL shapes to enforce domain/range constraints.",
+        "status": "Accepted",
+        "priority": 2,
+        "created": "2025-04-25T17:47:00+03:00",
+        "affectsTask": [
+            "task:4_shape",
+            "task:5_validator"
+        ],
+        "resolvedBy": [
+            "task:4_shape",
+            "task:5_validator"
+        ]
+    },
+    "sug:embed_vs_uri": {
+        "@id": "sug:embed_vs_uri",
+        "@type": "meta:Suggestion",
+        "rdfs:comment": "Consider linking artifacts by URI rather than embedding full content to reduce KG size.",
+        "status": "Pending",
+        "priority": 3,
+        "created": "2025-04-25T17:47:30+03:00",
+        "affectsTask": [],
+        "resolvedBy": []
+    },
+    "sug:schema_scope": {
+        "@id": "sug:schema_scope",
+        "@type": "meta:Suggestion",
+        "rdfs:comment": "Clarify whether ontology v2 covers only roadmap terms or all pf:* entities (FunctionalRequirement, etc.).",
+        "status": "Pending",
+        "priority": 2,
+        "created": "2025-04-25T17:48:00+03:00",
+        "affectsTask": [],
+        "resolvedBy": []
+    }
+}

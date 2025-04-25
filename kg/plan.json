@@ -1,0 +1,332 @@
+{
+    "@context": {
+        "pf": "https://profitflip.io/kg/v1#",
+        "road": "pf:roadmap/",
+        "ep": "road:epic/",
+        "tsk": "road:task/",
+        "role": "road:role/",
+        "person": "road:person/",
+        "pred": "road:predicate/",
+        "artifact": "road:artifact/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "hasEpic": {
+            "@id": "pf:hasEpic",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "hasTask": {
+            "@id": "pf:hasTask",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "dependsOn": {
+            "@id": "pf:dependsOn",
+            "@type": "@id",
+            "@reverse": "isPrerequisiteFor"
+        },
+        "owner": {
+            "@id": "pf:owner",
+            "@type": "@id"
+        },
+        "assignee": {
+            "@id": "pf:assignee",
+            "@type": "@id"
+        },
+        "sequence": {
+            "@id": "pf:sequence",
+            "@type": "xsd:integer"
+        },
+        "eta": {
+            "@id": "pf:eta",
+            "@type": "xsd:duration"
+        },
+        "status": {
+            "@id": "pf:status"
+        },
+        "progress": {
+            "@id": "pf:progress",
+            "@type": "xsd:integer"
+        },
+        "timeSpent": {
+            "@id": "pf:timeSpent",
+            "@type": "xsd:duration"
+        },
+        "completionDate": {
+            "@id": "pf:completionDate",
+            "@type": "xsd:dateTime"
+        },
+        "lastUpdatedBy": {
+            "@id": "pf:lastUpdatedBy",
+            "@type": "@id"
+        },
+        "lastUpdatedAt": {
+            "@id": "pf:lastUpdatedAt",
+            "@type": "xsd:dateTime"
+        },
+        "statusHistory": {
+            "@id": "pf:statusHistory",
+            "@type": "@json"
+        },
+        "producesArtifact": {
+            "@id": "pf:producesArtifact",
+            "@type": "@id",
+            "@reverse": "pf:generatedBy"
+        }
+    },
+    "@id": "road:KG_Source_of_Truth_v1",
+    "@type": "pf:Roadmap",
+    "name": "ProfitFlip – KG-as-Single-Tracker Sprint",
+    "hasEpic": [
+        "ep:Governance",
+        "ep:OntologyUpgrade",
+        "ep:CLITooling",
+        "ep:CIEnforcement",
+        "ep:Visualization"
+    ],
+    "role:DevOps": {
+        "@id": "role:DevOps",
+        "@type": "pf:Role",
+        "name": "DevOps"
+    },
+    "role:PM": {
+        "@id": "role:PM",
+        "@type": "pf:Role",
+        "name": "Product Manager"
+    },
+    "person:alex": {
+        "@id": "person:alex",
+        "@type": "pf:Person",
+        "name": "Alex D.",
+        "owner": "role:DevOps"
+    },
+    "person:yael": {
+        "@id": "person:yael",
+        "@type": "pf:Person",
+        "name": "Yael B.",
+        "owner": "role:PM"
+    },
+    "pred:statusHistory": {
+        "@id": "pred:statusHistory",
+        "@type": "pf:Predicate",
+        "name": "statusHistory"
+    },
+    "pred:lastUpdatedBy": {
+        "@id": "pred:lastUpdatedBy",
+        "@type": "pf:Predicate",
+        "name": "lastUpdatedBy"
+    },
+    "pred:lastUpdatedAt": {
+        "@id": "pred:lastUpdatedAt",
+        "@type": "pf:Predicate",
+        "name": "lastUpdatedAt"
+    },
+    "pred:progress": {
+        "@id": "pred:progress",
+        "@type": "pf:Predicate",
+        "name": "progress"
+    },
+    "artifact:cli_task_ts": {
+        "@id": "artifact:cli_task_ts",
+        "@type": "pf:Artifact",
+        "name": "tools/kg-task.ts",
+        "content": "#!/usr/bin/env node\nimport fs from \"fs\";\nimport jsonld from \"@digitalbazaar/jsonld\";\nimport yargs from \"yargs\";\nconst KG_FILE = \"roadmap.jsonld\";\n// … trimmed for brevity …\nconsole.log(\"Graph updated ✔\");"
+    },
+    "artifact:ci_lint_yaml": {
+        "@id": "artifact:ci_lint_yaml",
+        "@type": "pf:Artifact",
+        "name": ".github/workflows/kg_lint.yml",
+        "content": "name: KG Lint\non: [pull_request]\njobs:\n  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npx jsonld flatten roadmap.jsonld > /dev/null"
+    },
+    "ep:Governance": {
+        "@id": "ep:Governance",
+        "@type": "pf:Epic",
+        "name": "Governance & Conventions",
+        "sequence": 1,
+        "hasTask": [
+            "tsk:Gov-1",
+            "tsk:Gov-2"
+        ]
+    },
+    "tsk:Gov-1": {
+        "@id": "tsk:Gov-1",
+        "@type": "pf:Task",
+        "name": "Finalize status vocabulary",
+        "sequence": 1,
+        "owner": "role:PM",
+        "assignee": "person:yael",
+        "eta": "P0DT2H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:readme_status",
+        "successSignal": "README-KG.md includes status enum"
+    },
+    "artifact:readme_status": {
+        "@id": "artifact:readme_status",
+        "@type": "pf:Artifact",
+        "name": "docs/README-KG.md (status section)",
+        "content": "## Task Status Enum\n`ToDo | InProgress | Blocked | Done`"
+    },
+    "tsk:Gov-2": {
+        "@id": "tsk:Gov-2",
+        "@type": "pf:Task",
+        "name": "Declare KG patch protocol",
+        "sequence": 2,
+        "owner": "role:PM",
+        "assignee": "person:yael",
+        "dependsOn": "tsk:Gov-1",
+        "eta": "P0DT2H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:contributing",
+        "successSignal": "CONTRIBUTING.md updated"
+    },
+    "artifact:contributing": {
+        "@id": "artifact:contributing",
+        "@type": "pf:Artifact",
+        "name": "CONTRIBUTING.md",
+        "content": "### KG Update Protocol\nEach pull-request must include a JSON-LD patch …"
+    },
+    "ep:OntologyUpgrade": {
+        "@id": "ep:OntologyUpgrade",
+        "@type": "pf:Epic",
+        "name": "Ontology Upgrade",
+        "sequence": 2,
+        "hasTask": [
+            "tsk:Ont-1"
+        ]
+    },
+    "tsk:Ont-1": {
+        "@id": "tsk:Ont-1",
+        "@type": "pf:Task",
+        "name": "Patch context with new predicates",
+        "sequence": 1,
+        "owner": "role:DevOps",
+        "assignee": "person:alex",
+        "eta": "P0DT2H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:context_patch",
+        "successSignal": "Context file passes jsonld flatten"
+    },
+    "artifact:context_patch": {
+        "@id": "artifact:context_patch",
+        "@type": "pf:Artifact",
+        "name": "kg_context_patch.jsonld",
+        "content": "{ \"pf:statusHistory\": {\"@id\":\"pf:statusHistory\"}, … }"
+    },
+    "ep:CLITooling": {
+        "@id": "ep:CLITooling",
+        "@type": "pf:Epic",
+        "name": "CLI Tooling",
+        "sequence": 3,
+        "hasTask": [
+            "tsk:CLI-1",
+            "tsk:CLI-2"
+        ]
+    },
+    "tsk:CLI-1": {
+        "@id": "tsk:CLI-1",
+        "@type": "pf:Task",
+        "name": "Implement kg-task set/view commands",
+        "sequence": 1,
+        "owner": "role:DevOps",
+        "assignee": "person:alex",
+        "eta": "P0DT4H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:cli_task_ts",
+        "successSignal": "CLI outputs 'graph updated ✔'"
+    },
+    "tsk:CLI-2": {
+        "@id": "tsk:CLI-2",
+        "@type": "pf:Task",
+        "name": "Add burndown and Kanban views",
+        "sequence": 2,
+        "owner": "role:DevOps",
+        "assignee": "person:alex",
+        "dependsOn": "tsk:CLI-1",
+        "eta": "P0DT4H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "successSignal": "Demo GIF attached to PR"
+    },
+    "ep:CIEnforcement": {
+        "@id": "ep:CIEnforcement",
+        "@type": "pf:Epic",
+        "name": "CI Enforcement",
+        "sequence": 4,
+        "hasTask": [
+            "tsk:CI-1",
+            "tsk:CI-2"
+        ]
+    },
+    "tsk:CI-1": {
+        "@id": "tsk:CI-1",
+        "@type": "pf:Task",
+        "name": "Add KG lint workflow",
+        "sequence": 1,
+        "owner": "role:DevOps",
+        "assignee": "person:alex",
+        "eta": "P0DT2H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:ci_lint_yaml",
+        "successSignal": "Failing PR on malformed graph"
+    },
+    "tsk:CI-2": {
+        "@id": "tsk:CI-2",
+        "@type": "pf:Task",
+        "name": "Add KG diff comment workflow",
+        "sequence": 2,
+        "owner": "role:DevOps",
+        "assignee": "person:alex",
+        "dependsOn": "tsk:CI-1",
+        "eta": "P0DT4H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:ci_diff_yaml",
+        "successSignal": "PR comment lists triple deltas"
+    },
+    "artifact:ci_diff_yaml": {
+        "@id": "artifact:ci_diff_yaml",
+        "@type": "pf:Artifact",
+        "name": ".github/workflows/kg_diff.yml",
+        "content": "name: KG Diff\non: [pull_request]\n…"
+    },
+    "ep:Visualization": {
+        "@id": "ep:Visualization",
+        "@type": "pf:Epic",
+        "name": "Visualization",
+        "sequence": 5,
+        "hasTask": [
+            "tsk:Viz-1"
+        ]
+    },
+    "tsk:Viz-1": {
+        "@id": "tsk:Viz-1",
+        "@type": "pf:Task",
+        "name": "Publish nightly Gantt from Cypher",
+        "sequence": 1,
+        "owner": "role:DevOps",
+        "assignee": "person:alex",
+        "eta": "P0DT6H",
+        "status": "ToDo",
+        "progress": 0,
+        "timeSpent": "PT0H",
+        "producesArtifact": "artifact:gantt_html",
+        "successSignal": "/roadmap/index.html shows chart"
+    },
+    "artifact:gantt_html": {
+        "@id": "artifact:gantt_html",
+        "@type": "pf:Artifact",
+        "name": "gh-pages/roadmap/index.html",
+        "content": "<!DOCTYPE html><html><head><title>Gantt</title></head><body><!-- D3 chart placeholder --></body></html>"
+    }
+}

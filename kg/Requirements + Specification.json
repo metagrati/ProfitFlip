@@ -1,0 +1,251 @@
+{
+    "@context": {
+        "pf": "https://profitflip.io/kg/v1#",
+        "schema": "http://schema.org/",
+        "req": "pf:req/",
+        "nfr": "pf:nfr/",
+        "comp": "pf:comp/",
+        "risk": "pf:risk/",
+        "metric": "pf:metric/",
+        "hasRequirement": {
+            "@id": "pf:hasRequirement",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "hasNonFunctional": {
+            "@id": "pf:hasNonFunctional",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "hasPart": {
+            "@id": "schema:hasPart",
+            "@type": "@id",
+            "@container": "@set"
+        },
+        "isPartOf": {
+            "@reverse": "schema:hasPart"
+        },
+        "addresses": {
+            "@id": "pf:addresses",
+            "@type": "@id",
+            "@reverse": "isAddressedBy"
+        },
+        "isAddressedBy": {
+            "@id": "pf:isAddressedBy",
+            "@type": "@id"
+        },
+        "requiresComponent": {
+            "@id": "pf:requiresComponent",
+            "@type": "@id",
+            "@reverse": "isRequiredByComponent"
+        },
+        "requiresRequirement": {
+            "@id": "pf:requiresRequirement",
+            "@type": "@id",
+            "@reverse": "isRequiredByRequirement"
+        },
+        "isMitigatedBy": {
+            "@id": "pf:isMitigatedBy",
+            "@type": "@id",
+            "@reverse": "mitigates"
+        },
+        "mitigates": {
+            "@id": "pf:mitigates",
+            "@type": "@id"
+        },
+        "measuredBy": {
+            "@id": "pf:measuredBy",
+            "@type": "@id",
+            "@reverse": "measures"
+        },
+        "measures": {
+            "@id": "pf:measures",
+            "@type": "@id"
+        }
+    },
+    "@id": "pf:ProfitFlip_v1",
+    "@type": "schema:SoftwareApplication",
+    "name": "ProfitFlip v1",
+    "description": "A crypto price-prediction game on Polygon (3-5 min BTC/USD rounds).",
+    "hasRequirement": [
+        "req:F-1",
+        "req:F-2",
+        "req:F-3",
+        "req:F-4",
+        "req:F-5",
+        "req:F-6",
+        "req:F-7",
+        "req:F-8",
+        "req:F-9"
+    ],
+    "hasNonFunctional": [
+        "nfr:Performance",
+        "nfr:Accessibility",
+        "nfr:Responsiveness",
+        "nfr:Security",
+        "nfr:Reliability",
+        "nfr:Observability",
+        "nfr:I18n"
+    ],
+    "hasPart": [
+        "comp:Frontend",
+        "comp:BlockchainLayer",
+        "comp:DesignSystem",
+        "comp:CI_CD",
+        "comp:DockerDeploy"
+    ],
+    "req:F-1": {
+        "@id": "req:F-1",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Wallet connectivity",
+        "requiresComponent": "comp:Frontend"
+    },
+    "req:F-2": {
+        "@id": "req:F-2",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Live round card",
+        "requiresRequirement": "req:F-1"
+    },
+    "req:F-3": {
+        "@id": "req:F-3",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Carousel"
+    },
+    "req:F-4": {
+        "@id": "req:F-4",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Bet placement",
+        "requiresComponent": "comp:BlockchainLayer",
+        "requiresRequirement": "req:F-1"
+    },
+    "req:F-5": {
+        "@id": "req:F-5",
+        "@type": "pf:FunctionalRequirement",
+        "name": "User history"
+    },
+    "req:F-6": {
+        "@id": "req:F-6",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Claim-all"
+    },
+    "req:F-7": {
+        "@id": "req:F-7",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Auto-refresh"
+    },
+    "req:F-8": {
+        "@id": "req:F-8",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Responsible gaming"
+    },
+    "req:F-9": {
+        "@id": "req:F-9",
+        "@type": "pf:FunctionalRequirement",
+        "name": "Gas & cost preview"
+    },
+    "nfr:Performance": {
+        "@id": "nfr:Performance",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Performance",
+        "description": "JS < 200 kB; LCP < 3 s on 4 G",
+        "measuredBy": [
+            "metric:JS_Bundle",
+            "metric:LCP"
+        ]
+    },
+    "nfr:Accessibility": {
+        "@id": "nfr:Accessibility",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Accessibility",
+        "description": "WCAG 2.1 AA; axe-core in CI"
+    },
+    "nfr:Responsiveness": {
+        "@id": "nfr:Responsiveness",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Responsive design"
+    },
+    "nfr:Security": {
+        "@id": "nfr:Security",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Security"
+    },
+    "nfr:Reliability": {
+        "@id": "nfr:Reliability",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Reliability"
+    },
+    "nfr:Observability": {
+        "@id": "nfr:Observability",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Observability"
+    },
+    "nfr:I18n": {
+        "@id": "nfr:I18n",
+        "@type": "pf:NonFunctionalRequirement",
+        "name": "Internationalisation"
+    },
+    "comp:Frontend": {
+        "@id": "comp:Frontend",
+        "@type": "schema:SoftwareComponent",
+        "name": "Frontend",
+        "addresses": [
+            "req:F-1",
+            "req:F-2",
+            "req:F-3",
+            "req:F-5",
+            "req:F-7",
+            "req:F-9"
+        ]
+    },
+    "comp:BlockchainLayer": {
+        "@id": "comp:BlockchainLayer",
+        "@type": "schema:SoftwareComponent",
+        "name": "Blockchain layer",
+        "addresses": [
+            "req:F-4"
+        ]
+    },
+    "comp:DesignSystem": {
+        "@id": "comp:DesignSystem",
+        "@type": "schema:SoftwareComponent",
+        "name": "Design System"
+    },
+    "comp:CI_CD": {
+        "@id": "comp:CI_CD",
+        "@type": "schema:SoftwareComponent",
+        "name": "CI/CD Pipeline"
+    },
+    "comp:DockerDeploy": {
+        "@id": "comp:DockerDeploy",
+        "@type": "schema:SoftwareComponent",
+        "name": "Docker deploy"
+    },
+    "risk:R-1": {
+        "@id": "risk:R-1",
+        "@type": "pf:Risk",
+        "name": "Polling may not scale",
+        "isMitigatedBy": "req:F-7"
+    },
+    "risk:R-2": {
+        "@id": "risk:R-2",
+        "@type": "pf:Risk",
+        "name": "Oracle downtime stalls rounds",
+        "isMitigatedBy": "req:F-8"
+    },
+    "risk:R-3": {
+        "@id": "risk:R-3",
+        "@type": "pf:Risk",
+        "name": "Gas spikes cause failures",
+        "isMitigatedBy": "req:F-9"
+    },
+    "metric:LCP": {
+        "@id": "metric:LCP",
+        "@type": "pf:Metric",
+        "name": "Largest Contentful Paint"
+    },
+    "metric:JS_Bundle": {
+        "@id": "metric:JS_Bundle",
+        "@type": "pf:Metric",
+        "name": "JS bundle size (gzipped)"
+    }
+}
