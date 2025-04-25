@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "motivation": "pf:motivation/",
+    "issue": "pf:issue/",
+    "analysis": "pf:analysis/",
+    "suggestion": "pf:suggestion/",
+    "result": "pf:result/",
+    "plan": "pf:plan/",
+    "schema": "http://schema.org/",
+    "meta": "https://profitflip.io/meta#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describes": { "@id": "schema:description" },
+    "name": { "@id": "schema:name" },
+    "basedOnResult": { "@id": "pf:basedOnResult", "@type": "@id" },
+    "identifiesIssue": { "@id": "pf:identifiesIssue", "@type": "@id" },
+    "providesAnalysis": { "@id": "pf:providesAnalysis", "@type": "@id" },
+    "offersSuggestion": { "@id": "pf:offersSuggestion", "@type": "@id" },
+    "referencesPlan": { "@id": "pf:referencesPlan", "@type": "@id" },
+    "created": { "@id": "meta:created", "@type": "xsd:dateTime" }
+  },
+  "@id": "motivation:investigate_pr_permission_failure_v1",
+  "@type": "pf:MotivationDocument",
+  "name": "Motivation for Investigating PR Permission Failure",
+  "describes": "Documents the need for further investigation after the initial plan to fix PR creation permissions failed.",
+  "created": "2025-07-24T12:10:00Z", 
+  "basedOnResult": "result:resolve_pr_permission_issue_v1_outcome",
+  "identifiesIssue": "issue:prCreationFailureUnknownRootCause",
+  "providesAnalysis": "analysis:contingencyPlanRequired",
+  "offersSuggestion": "suggestion:executeContingencyPlan",
+  "@graph": [
+    {
+      "@id": "issue:prCreationFailureUnknownRootCause",
+      "@type": "pf:WorkflowIssue",
+      "name": "PR Creation Failure - Unknown Root Cause",
+      "describes": "The workflow continues to fail with the error 'GitHub Actions is not permitted to create or approve pull requests', even after potentially correcting repository settings. The specific root cause beyond general permissions is now unknown.",
+      "basedOnResult": "result:resolve_pr_permission_issue_v1_outcome" 
+    },
+    {
+      "@id": "analysis:contingencyPlanRequired",
+      "@type": "pf:IssueAnalysis",
+      "name": "Contingency Plan Activation Required",
+      "describes": "The failure of the initial plan triggers the need to execute the contingency step ('step:furtherInvestigation') defined in the previous plan.",
+      "referencesPlan": "plan:resolve_pr_permission_issue_v1"
+    },
+    {
+      "@id": "suggestion:executeContingencyPlan",
+      "@type": "pf:HighLevelSuggestion",
+      "name": "Execute Contingency Investigation Steps",
+      "suggestsAction": "Proceed with the detailed investigation steps outlined in the contingency plan: detailed log analysis, workflow input review, branch protection rule check, etc."
+    },
+    { "@id": "result:resolve_pr_permission_issue_v1_outcome" },
+    { "@id": "plan:resolve_pr_permission_issue_v1" } 
+  ]
+} 
