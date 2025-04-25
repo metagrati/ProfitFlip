@@ -10,7 +10,7 @@ ProfitFlip is a CI-first project built around three uncompromising principles:
 > Before every commit, please check this README and update it accordingly to reflect your changes.
 
 ---
-
+[![CI Status](https://github.com/metagrati/ProfitFlip/actions/workflows/ci-status.yml/badge.svg)](https://github.com/metagrati/ProfitFlip/actions/workflows/ci-status.yml)
 + ![deadline](https://img.shields.io/date/1745697600.svg?label=deadline&color=critical&cacheSeconds=300)
 
 ##  Project Task Log
@@ -241,3 +241,4 @@ docker compose restart db
 
 <!-- Workflow Trigger: 2025-07-24T12:15:00Z -->
 <!-- Workflow Trigger: 2025-07-24T12:45:00Z -->
+<!-- Workflow Trigger: 2025-07-24T13:00:00Z -->

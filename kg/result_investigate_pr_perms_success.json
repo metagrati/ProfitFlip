@@ -1,0 +1,25 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "file": "pf:file/",
+    "action": "pf:action/",
+    "workflow": "pf:workflow/",
+    "concept": "pf:concept/",
+    "result": "pf:result/",
+    "schema": "http://schema.org/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "outcomeOfPlan": { "@id": "pf:outcomeOfPlan", "@type": "@id" },
+    "basedOnResult": { "@id": "pf:basedOnResult", "@type": "@id" },
+    "generated": { "@id": "prov:generated", "@type": "xsd:dateTime" },
+    "generatedBy": { "@id": "prov:generatedBy", "@type": "@id" }
+  },
+  "@id": "result:investigate_pr_perms_success",
+  "@type": ["pf:PlanResult", "pf:KnowledgeGraph", "schema:CreativeWork"],
+  "schema:name": "Result KG for Successful PR Permission Investigation",
+  "schema:description": "Documents the successful outcome of the investigation into the GitHub Actions permission error preventing PR creation. The root cause was identified as repository settings restricting Actions permissions, specifically the 'Allow GitHub Actions to create and approve pull requests' setting.",
+  "pf:outcome": "Success",
+  "pf:summary": "The 'peter-evans/create-pull-request' action now successfully creates pull requests after enabling the 'Allow GitHub Actions to create and approve pull requests' option in the repository's Actions settings.",
+  "outcomeOfPlan": "file:plan_investigate_pr_perms",
+  "generated": "2025-07-24T13:05:00Z",
+  "generatedBy": "pf:aiAssistantGemini"
+} 
