@@ -240,3 +240,4 @@ docker compose restart db
 (*If your local `make` output differs, sync this table with the recipes in `Makefile`.*)
 
 <!-- Workflow Trigger: 2025-07-24T12:15:00Z -->
+<!-- Workflow Trigger: 2025-07-24T12:45:00Z -->
