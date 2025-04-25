@@ -1,8 +1,8 @@
-﻿2025-04-25T15:25:19.3181040Z ##[group]Run ./scripts/run-green-flag.sh
-2025-04-25T15:25:19.3181393Z [36;1m./scripts/run-green-flag.sh[0m
-2025-04-25T15:25:19.3214327Z shell: /usr/bin/bash -e {0}
-2025-04-25T15:25:19.3214579Z ##[endgroup]
-2025-04-25T15:25:19.3316397Z 🏁 Starting green-flag smoke suite at Fri Apr 25 15:25:19 UTC 2025
-2025-04-25T15:25:19.3347053Z 🟡 Skipping smoke:fork (not defined)
-2025-04-25T15:25:19.3360480Z 🟡 Skipping smoke:amoy (not defined)
-2025-04-25T15:25:19.3373092Z 🕒 Duration: 0s
+﻿2025-04-25T15:48:21.8159964Z ##[group]Run ./scripts/run-green-flag.sh
+2025-04-25T15:48:21.8160328Z [36;1m./scripts/run-green-flag.sh[0m
+2025-04-25T15:48:21.8194861Z shell: /usr/bin/bash -e {0}
+2025-04-25T15:48:21.8195113Z ##[endgroup]
+2025-04-25T15:48:21.8298752Z 🏁 Starting green-flag smoke suite at Fri Apr 25 15:48:21 UTC 2025
+2025-04-25T15:48:21.8464760Z 🟡 Skipping smoke:fork (not defined)
+2025-04-25T15:48:21.8478363Z 🟡 Skipping smoke:amoy (not defined)
+2025-04-25T15:48:21.8490840Z 🕒 Duration: 0s

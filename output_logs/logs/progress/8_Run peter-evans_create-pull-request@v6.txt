@@ -1,200 +1,196 @@
-﻿2025-04-25T15:25:20.2275237Z ##[group]Run peter-evans/create-pull-request@v6
-2025-04-25T15:25:20.2275552Z with:
-2025-04-25T15:25:20.2275746Z   branch: progress-bot/14668038371
-2025-04-25T15:25:20.2275970Z   base: main
-2025-04-25T15:25:20.2276148Z   delete-branch: true
-2025-04-25T15:25:20.2276371Z   title: chore(progress): auto-update checklist
-2025-04-25T15:25:20.2276871Z   commit-message: chore(progress): auto-tick items
-2025-04-25T15:25:20.2277257Z   token: ***
-2025-04-25T15:25:20.2277589Z   committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-2025-04-25T15:25:20.2278053Z   author: metagrati <128862859+metagrati@users.noreply.github.com>
-2025-04-25T15:25:20.2278365Z   signoff: false
-2025-04-25T15:25:20.2278790Z   body: Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
-2025-04-25T15:25:20.2279248Z   draft: false
-2025-04-25T15:25:20.2279416Z ##[endgroup]
-2025-04-25T15:25:20.3225200Z ##[group]Prepare git configuration
-2025-04-25T15:25:20.3274047Z [command]/usr/bin/git config --global --name-only --get-regexp safe.directory /home/runner/work/ProfitFlip/ProfitFlip
-2025-04-25T15:25:20.3334781Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ProfitFlip/ProfitFlip
-2025-04-25T15:25:20.3364695Z [command]/usr/bin/git config --local --get remote.origin.url
-2025-04-25T15:25:20.3386846Z https://github.com/metagrati/ProfitFlip
-2025-04-25T15:25:20.3404021Z [command]/usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
-2025-04-25T15:25:20.3424868Z http.https://github.com/.extraheader
-2025-04-25T15:25:20.3434523Z [command]/usr/bin/git config --local --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
-2025-04-25T15:25:20.3455623Z http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2025-04-25T15:25:20.3465415Z [command]/usr/bin/git config --local --unset http.https://github.com/.extraheader ^AUTHORIZATION:
-2025-04-25T15:25:20.3492075Z Unset config key 'http.https://github.com/.extraheader'
-2025-04-25T15:25:20.3492927Z ##[endgroup]
-2025-04-25T15:25:20.3493487Z ##[group]Determining the base and head repositories
-2025-04-25T15:25:20.3554116Z ##[endgroup]
-2025-04-25T15:25:20.3558396Z Pull request branch target repository set to metagrati/ProfitFlip
-2025-04-25T15:25:20.3560617Z ##[group]Configuring credential for HTTPS authentication
-2025-04-25T15:25:20.3563099Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2025-04-25T15:25:20.3605904Z [command]/usr/bin/git rev-parse --git-dir
-2025-04-25T15:25:20.3627022Z .git
-2025-04-25T15:25:20.3644663Z ##[endgroup]
-2025-04-25T15:25:20.3650931Z ##[group]Checking the base repository state
-2025-04-25T15:25:20.3651388Z [command]/usr/bin/git symbolic-ref HEAD --short
-2025-04-25T15:25:20.3672956Z progress-bot/14668038371
-2025-04-25T15:25:20.3677420Z Working base is branch 'progress-bot/14668038371'
-2025-04-25T15:25:20.3681892Z [command]/usr/bin/git remote prune origin
-2025-04-25T15:25:20.7297212Z ##[endgroup]
-2025-04-25T15:25:20.7297757Z Pull request branch to create or update set to 'progress-bot/14668038371'
-2025-04-25T15:25:20.7298302Z ##[group]Configuring the committer and author
-2025-04-25T15:25:20.7300313Z Configured git committer as 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
-2025-04-25T15:25:20.7301293Z Configured git author as 'metagrati <128862859+metagrati@users.noreply.github.com>'
-2025-04-25T15:25:20.7301833Z ##[endgroup]
-2025-04-25T15:25:20.7302167Z ##[group]Create or update the pull request branch
-2025-04-25T15:25:20.7308014Z [command]/usr/bin/git symbolic-ref HEAD --short
-2025-04-25T15:25:20.7335477Z progress-bot/14668038371
-2025-04-25T15:25:20.7340734Z Working base is branch 'progress-bot/14668038371'
-2025-04-25T15:25:20.7349239Z [command]/usr/bin/git checkout --progress -B e8c37790-a51e-4cc2-8258-2f4a9af24fe1 HEAD --
-2025-04-25T15:25:20.7418454Z Switched to a new branch 'e8c37790-a51e-4cc2-8258-2f4a9af24fe1'
-2025-04-25T15:25:20.7419095Z M	docs/plan-b2.checklist.md
-2025-04-25T15:25:20.7428780Z [command]/usr/bin/git status --porcelain -unormal --
-2025-04-25T15:25:20.7459074Z  M docs/plan-b2.checklist.md
-2025-04-25T15:25:20.7466747Z Uncommitted changes found. Adding a commit.
-2025-04-25T15:25:20.7468041Z [command]/usr/bin/git add -A
-2025-04-25T15:25:20.7505793Z [command]/usr/bin/git -c author.name=metagrati -c author.email=128862859+metagrati@users.noreply.github.com -c committer.name=github-actions[bot] -c committer.email=41898282+github-actions[bot]@users.noreply.github.com commit -m chore(progress): auto-tick items
-2025-04-25T15:25:20.7561152Z [e8c37790-a51e-4cc2-8258-2f4a9af24fe1 3f9f1ac] chore(progress): auto-tick items
-2025-04-25T15:25:20.7562109Z  Author: metagrati <128862859+metagrati@users.noreply.github.com>
-2025-04-25T15:25:20.7562647Z  1 file changed, 1 insertion(+), 1 deletion(-)
-2025-04-25T15:25:20.7569444Z [command]/usr/bin/git stash push --include-untracked
-2025-04-25T15:25:20.7596545Z No local changes to save
-2025-04-25T15:25:20.7601584Z Resetting working base branch 'progress-bot/14668038371'
-2025-04-25T15:25:20.7605718Z [command]/usr/bin/git checkout --progress progress-bot/14668038371 --
-2025-04-25T15:25:20.7636799Z Switched to branch 'progress-bot/14668038371'
-2025-04-25T15:25:20.7647539Z [command]/usr/bin/git reset --hard origin/progress-bot/14668038371
-2025-04-25T15:25:20.7680508Z HEAD is now at 05e1539 docs(kg): add motivation and plan for fixing PR permissions
-2025-04-25T15:25:20.7684678Z Rebasing commits made to branch 'progress-bot/14668038371' on to base branch 'main'
-2025-04-25T15:25:20.7689866Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force --depth=1 origin main:main
-2025-04-25T15:25:21.2504687Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
-2025-04-25T15:25:21.2574169Z [command]/usr/bin/git checkout --progress main --
-2025-04-25T15:25:21.2608150Z Switched to branch 'main'
-2025-04-25T15:25:21.2610386Z Your branch is up to date with 'origin/main'.
-2025-04-25T15:25:21.2620435Z [command]/usr/bin/git rev-list --reverse progress-bot/14668038371..e8c37790-a51e-4cc2-8258-2f4a9af24fe1 .
-2025-04-25T15:25:21.2650117Z 3f9f1ac76a36678756d847e3c0af7b897f686ef8
-2025-04-25T15:25:21.2659622Z [command]/usr/bin/git -c author.name=metagrati -c author.email=128862859+metagrati@users.noreply.github.com -c committer.name=github-actions[bot] -c committer.email=41898282+github-actions[bot]@users.noreply.github.com cherry-pick --strategy=recursive --strategy-option=theirs 3f9f1ac76a36678756d847e3c0af7b897f686ef8
-2025-04-25T15:25:21.2699912Z [main 140d3e2] chore(progress): auto-tick items
-2025-04-25T15:25:21.2700661Z  Author: metagrati <128862859+metagrati@users.noreply.github.com>
-2025-04-25T15:25:21.2701298Z  Date: Fri Apr 25 15:25:20 2025 +0000
-2025-04-25T15:25:21.2701720Z  1 file changed, 1 insertion(+), 1 deletion(-)
-2025-04-25T15:25:21.2708411Z [command]/usr/bin/git checkout --progress -B e8c37790-a51e-4cc2-8258-2f4a9af24fe1 HEAD --
-2025-04-25T15:25:21.2739485Z Switched to and reset branch 'e8c37790-a51e-4cc2-8258-2f4a9af24fe1'
-2025-04-25T15:25:21.2749755Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force --depth=1 origin main:main
-2025-04-25T15:25:21.7674347Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
-2025-04-25T15:25:21.7717177Z From https://github.com/metagrati/ProfitFlip
-2025-04-25T15:25:21.7717865Z  + 140d3e2...05e1539 main       -> main  (forced update)
-2025-04-25T15:25:21.7745082Z [command]/usr/bin/git rev-list --right-only --count main...e8c37790-a51e-4cc2-8258-2f4a9af24fe1
-2025-04-25T15:25:21.7769954Z 1
-2025-04-25T15:25:21.7779536Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force --depth=11 origin progress-bot/14668038371:refs/remotes/origin/progress-bot/14668038371
-2025-04-25T15:25:22.2604757Z remote: Enumerating objects: 46, done.        
-2025-04-25T15:25:22.2605577Z remote: Counting objects:   2% (1/46)        
-2025-04-25T15:25:22.2606978Z remote: Counting objects:   4% (2/46)        
-2025-04-25T15:25:22.2607808Z remote: Counting objects:   6% (3/46)        
-2025-04-25T15:25:22.2608630Z remote: Counting objects:   8% (4/46)        
-2025-04-25T15:25:22.2609336Z remote: Counting objects:  10% (5/46)        
-2025-04-25T15:25:22.2610060Z remote: Counting objects:  13% (6/46)        
-2025-04-25T15:25:22.2610794Z remote: Counting objects:  15% (7/46)        
-2025-04-25T15:25:22.2611498Z remote: Counting objects:  17% (8/46)        
-2025-04-25T15:25:22.2612120Z remote: Counting objects:  19% (9/46)        
-2025-04-25T15:25:22.2612722Z remote: Counting objects:  21% (10/46)        
-2025-04-25T15:25:22.2613355Z remote: Counting objects:  23% (11/46)        
-2025-04-25T15:25:22.2613748Z remote: Counting objects:  26% (12/46)        
-2025-04-25T15:25:22.2614127Z remote: Counting objects:  28% (13/46)        
-2025-04-25T15:25:22.2614504Z remote: Counting objects:  30% (14/46)        
-2025-04-25T15:25:22.2614892Z remote: Counting objects:  32% (15/46)        
-2025-04-25T15:25:22.2615431Z remote: Counting objects:  34% (16/46)        
-2025-04-25T15:25:22.2615805Z remote: Counting objects:  36% (17/46)        
-2025-04-25T15:25:22.2616192Z remote: Counting objects:  39% (18/46)        
-2025-04-25T15:25:22.2616779Z remote: Counting objects:  41% (19/46)        
-2025-04-25T15:25:22.2617178Z remote: Counting objects:  43% (20/46)        
-2025-04-25T15:25:22.2617560Z remote: Counting objects:  45% (21/46)        
-2025-04-25T15:25:22.2617935Z remote: Counting objects:  47% (22/46)        
-2025-04-25T15:25:22.2618316Z remote: Counting objects:  50% (23/46)        
-2025-04-25T15:25:22.2618898Z remote: Counting objects:  52% (24/46)        
-2025-04-25T15:25:22.2619275Z remote: Counting objects:  54% (25/46)        
-2025-04-25T15:25:22.2619654Z remote: Counting objects:  56% (26/46)        
-2025-04-25T15:25:22.2620032Z remote: Counting objects:  58% (27/46)        
-2025-04-25T15:25:22.2620417Z remote: Counting objects:  60% (28/46)        
-2025-04-25T15:25:22.2620807Z remote: Counting objects:  63% (29/46)        
-2025-04-25T15:25:22.2621187Z remote: Counting objects:  65% (30/46)        
-2025-04-25T15:25:22.2621557Z remote: Counting objects:  67% (31/46)        
-2025-04-25T15:25:22.2621860Z remote: Counting objects:  69% (32/46)        
-2025-04-25T15:25:22.2622170Z remote: Counting objects:  71% (33/46)        
-2025-04-25T15:25:22.2622487Z remote: Counting objects:  73% (34/46)        
-2025-04-25T15:25:22.2622823Z remote: Counting objects:  76% (35/46)        
-2025-04-25T15:25:22.2623160Z remote: Counting objects:  78% (36/46)        
-2025-04-25T15:25:22.2623479Z remote: Counting objects:  80% (37/46)        
-2025-04-25T15:25:22.2623800Z remote: Counting objects:  82% (38/46)        
-2025-04-25T15:25:22.2624113Z remote: Counting objects:  84% (39/46)        
-2025-04-25T15:25:22.2624425Z remote: Counting objects:  86% (40/46)        
-2025-04-25T15:25:22.2624727Z remote: Counting objects:  89% (41/46)        
-2025-04-25T15:25:22.2625038Z remote: Counting objects:  91% (42/46)        
-2025-04-25T15:25:22.2625347Z remote: Counting objects:  93% (43/46)        
-2025-04-25T15:25:22.2625666Z remote: Counting objects:  95% (44/46)        
-2025-04-25T15:25:22.2625986Z remote: Counting objects:  97% (45/46)        
-2025-04-25T15:25:22.2626301Z remote: Counting objects: 100% (46/46)        
-2025-04-25T15:25:22.2626840Z remote: Counting objects: 100% (46/46), done.        
-2025-04-25T15:25:22.2627204Z remote: Compressing objects:   4% (1/21)        
-2025-04-25T15:25:22.2627538Z remote: Compressing objects:   9% (2/21)        
-2025-04-25T15:25:22.2627866Z remote: Compressing objects:  14% (3/21)        
-2025-04-25T15:25:22.2628213Z remote: Compressing objects:  19% (4/21)        
-2025-04-25T15:25:22.2628544Z remote: Compressing objects:  23% (5/21)        
-2025-04-25T15:25:22.2628875Z remote: Compressing objects:  28% (6/21)        
-2025-04-25T15:25:22.2629195Z remote: Compressing objects:  33% (7/21)        
-2025-04-25T15:25:22.2629520Z remote: Compressing objects:  38% (8/21)        
-2025-04-25T15:25:22.2629999Z remote: Compressing objects:  42% (9/21)        
-2025-04-25T15:25:22.2630326Z remote: Compressing objects:  47% (10/21)        
-2025-04-25T15:25:22.2630666Z remote: Compressing objects:  52% (11/21)        
-2025-04-25T15:25:22.2630996Z remote: Compressing objects:  57% (12/21)        
-2025-04-25T15:25:22.2631314Z remote: Compressing objects:  61% (13/21)        
-2025-04-25T15:25:22.2631641Z remote: Compressing objects:  66% (14/21)        
-2025-04-25T15:25:22.2631962Z remote: Compressing objects:  71% (15/21)        
-2025-04-25T15:25:22.2632289Z remote: Compressing objects:  76% (16/21)        
-2025-04-25T15:25:22.2632620Z remote: Compressing objects:  80% (17/21)        
-2025-04-25T15:25:22.2632965Z remote: Compressing objects:  85% (18/21)        
-2025-04-25T15:25:22.2633347Z remote: Compressing objects:  90% (19/21)        
-2025-04-25T15:25:22.2633735Z remote: Compressing objects:  95% (20/21)        
-2025-04-25T15:25:22.2634368Z remote: Compressing objects: 100% (21/21)        
-2025-04-25T15:25:22.2635024Z remote: Compressing objects: 100% (21/21), done.        
-2025-04-25T15:25:22.2636489Z remote: Total 40 (delta 21), reused 34 (delta 16), pack-reused 0 (from 0)        
-2025-04-25T15:25:22.2751800Z Pull request branch 'progress-bot/14668038371' already exists as remote branch 'origin/progress-bot/14668038371'
-2025-04-25T15:25:22.2756446Z [command]/usr/bin/git checkout --progress progress-bot/14668038371 --
-2025-04-25T15:25:22.2790704Z Switched to branch 'progress-bot/14668038371'
-2025-04-25T15:25:22.2800585Z [command]/usr/bin/git rev-list --right-only --count main...progress-bot/14668038371
-2025-04-25T15:25:22.2823949Z 0
-2025-04-25T15:25:22.2832413Z [command]/usr/bin/git diff --quiet progress-bot/14668038371..e8c37790-a51e-4cc2-8258-2f4a9af24fe1
-2025-04-25T15:25:22.2860343Z Resetting 'progress-bot/14668038371'
-2025-04-25T15:25:22.2863858Z [command]/usr/bin/git checkout --progress -B progress-bot/14668038371 e8c37790-a51e-4cc2-8258-2f4a9af24fe1 --
-2025-04-25T15:25:22.2896230Z Reset branch 'progress-bot/14668038371'
-2025-04-25T15:25:22.2907247Z [command]/usr/bin/git rev-list --right-only --count origin/progress-bot/14668038371...progress-bot/14668038371
-2025-04-25T15:25:22.2929726Z 1
-2025-04-25T15:25:22.2933795Z Updated branch 'progress-bot/14668038371'
-2025-04-25T15:25:22.2937488Z [command]/usr/bin/git rev-list --right-only --count main...progress-bot/14668038371
-2025-04-25T15:25:22.2960107Z 1
-2025-04-25T15:25:22.2967243Z [command]/usr/bin/git rev-parse HEAD
-2025-04-25T15:25:22.2986452Z 140d3e24bf548fec2a5f5f6136e8400ae38f562d
-2025-04-25T15:25:22.2994372Z [command]/usr/bin/git branch --delete --force e8c37790-a51e-4cc2-8258-2f4a9af24fe1
-2025-04-25T15:25:22.3019350Z Deleted branch e8c37790-a51e-4cc2-8258-2f4a9af24fe1 (was 140d3e2).
-2025-04-25T15:25:22.3025945Z [command]/usr/bin/git checkout --progress progress-bot/14668038371 --
-2025-04-25T15:25:22.3054334Z Already on 'progress-bot/14668038371'
-2025-04-25T15:25:22.3061560Z ##[endgroup]
-2025-04-25T15:25:22.3062315Z ##[group]Pushing pull request branch to 'origin/progress-bot/14668038371'
-2025-04-25T15:25:22.3066757Z [command]/usr/bin/git push --force-with-lease origin progress-bot/14668038371:refs/heads/progress-bot/14668038371
-2025-04-25T15:25:23.0600860Z To https://github.com/metagrati/ProfitFlip
-2025-04-25T15:25:23.0601537Z    05e1539..140d3e2  progress-bot/14668038371 -> progress-bot/14668038371
-2025-04-25T15:25:23.0645269Z ##[endgroup]
-2025-04-25T15:25:23.0645713Z ##[group]Create or update the pull request
-2025-04-25T15:25:23.0650721Z Attempting creation of pull request
-2025-04-25T15:25:23.3415357Z ##[error]GitHub Actions is not permitted to create or approve pull requests.
-2025-04-25T15:25:23.3424463Z ##[group]Restore git configuration
-2025-04-25T15:25:23.3425629Z [command]/usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
-2025-04-25T15:25:23.3435429Z http.https://github.com/.extraheader
-2025-04-25T15:25:23.3443972Z [command]/usr/bin/git config --local --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
-2025-04-25T15:25:23.3469785Z http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2025-04-25T15:25:23.3477834Z [command]/usr/bin/git config --local --unset http.https://github.com/.extraheader ^AUTHORIZATION:
-2025-04-25T15:25:23.3507735Z Unset config key 'http.https://github.com/.extraheader'
-2025-04-25T15:25:23.3513299Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2025-04-25T15:25:23.3546799Z Persisted git credentials restored
-2025-04-25T15:25:23.3552227Z [command]/usr/bin/git config --global --unset safe.directory /home/runner/work/ProfitFlip/ProfitFlip
-2025-04-25T15:25:23.3580828Z ##[endgroup]
+﻿2025-04-25T15:48:22.6665092Z ##[group]Run peter-evans/create-pull-request@v6
+2025-04-25T15:48:22.6665391Z with:
+2025-04-25T15:48:22.6665572Z   branch: progress-bot/14668457748
+2025-04-25T15:48:22.6665787Z   base: main
+2025-04-25T15:48:22.6665950Z   delete-branch: true
+2025-04-25T15:48:22.6666165Z   title: chore(progress): auto-update checklist
+2025-04-25T15:48:22.6666457Z   commit-message: chore(progress): auto-tick items
+2025-04-25T15:48:22.6666825Z   token: ***
+2025-04-25T15:48:22.6667153Z   committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+2025-04-25T15:48:22.6667620Z   author: metagrati <128862859+metagrati@users.noreply.github.com>
+2025-04-25T15:48:22.6667931Z   signoff: false
+2025-04-25T15:48:22.6668348Z   body: Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
+2025-04-25T15:48:22.6668803Z   draft: false
+2025-04-25T15:48:22.6668978Z ##[endgroup]
+2025-04-25T15:48:22.7606657Z ##[group]Prepare git configuration
+2025-04-25T15:48:22.7654763Z [command]/usr/bin/git config --global --name-only --get-regexp safe.directory /home/runner/work/ProfitFlip/ProfitFlip
+2025-04-25T15:48:22.7718639Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ProfitFlip/ProfitFlip
+2025-04-25T15:48:22.7751869Z [command]/usr/bin/git config --local --get remote.origin.url
+2025-04-25T15:48:22.7776216Z https://github.com/metagrati/ProfitFlip
+2025-04-25T15:48:22.7793737Z [command]/usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+2025-04-25T15:48:22.7818937Z http.https://github.com/.extraheader
+2025-04-25T15:48:22.7829011Z [command]/usr/bin/git config --local --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+2025-04-25T15:48:22.7853849Z http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-04-25T15:48:22.7863079Z [command]/usr/bin/git config --local --unset http.https://github.com/.extraheader ^AUTHORIZATION:
+2025-04-25T15:48:22.7891913Z Unset config key 'http.https://github.com/.extraheader'
+2025-04-25T15:48:22.7892930Z ##[endgroup]
+2025-04-25T15:48:22.7893641Z ##[group]Determining the base and head repositories
+2025-04-25T15:48:22.7954798Z ##[endgroup]
+2025-04-25T15:48:22.7960076Z Pull request branch target repository set to metagrati/ProfitFlip
+2025-04-25T15:48:22.7961420Z ##[group]Configuring credential for HTTPS authentication
+2025-04-25T15:48:22.7974770Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-04-25T15:48:22.8010421Z [command]/usr/bin/git rev-parse --git-dir
+2025-04-25T15:48:22.8032017Z .git
+2025-04-25T15:48:22.8049697Z ##[endgroup]
+2025-04-25T15:48:22.8050433Z ##[group]Checking the base repository state
+2025-04-25T15:48:22.8055803Z [command]/usr/bin/git symbolic-ref HEAD --short
+2025-04-25T15:48:22.8080759Z progress-bot/14668457748
+2025-04-25T15:48:22.8085886Z Working base is branch 'progress-bot/14668457748'
+2025-04-25T15:48:22.8090617Z [command]/usr/bin/git remote prune origin
+2025-04-25T15:48:23.2123156Z ##[endgroup]
+2025-04-25T15:48:23.2124003Z Pull request branch to create or update set to 'progress-bot/14668457748'
+2025-04-25T15:48:23.2124917Z ##[group]Configuring the committer and author
+2025-04-25T15:48:23.2126121Z Configured git committer as 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+2025-04-25T15:48:23.2127377Z Configured git author as 'metagrati <128862859+metagrati@users.noreply.github.com>'
+2025-04-25T15:48:23.2128331Z ##[endgroup]
+2025-04-25T15:48:23.2128955Z ##[group]Create or update the pull request branch
+2025-04-25T15:48:23.2134317Z [command]/usr/bin/git symbolic-ref HEAD --short
+2025-04-25T15:48:23.2160438Z progress-bot/14668457748
+2025-04-25T15:48:23.2165387Z Working base is branch 'progress-bot/14668457748'
+2025-04-25T15:48:23.2173552Z [command]/usr/bin/git checkout --progress -B a21459d9-6a91-47d6-9b7c-331a1f74d5ca HEAD --
+2025-04-25T15:48:23.2248708Z Switched to a new branch 'a21459d9-6a91-47d6-9b7c-331a1f74d5ca'
+2025-04-25T15:48:23.2251257Z M	docs/plan-b2.checklist.md
+2025-04-25T15:48:23.2260855Z [command]/usr/bin/git status --porcelain -unormal --
+2025-04-25T15:48:23.2290459Z  M docs/plan-b2.checklist.md
+2025-04-25T15:48:23.2295534Z Uncommitted changes found. Adding a commit.
+2025-04-25T15:48:23.2299760Z [command]/usr/bin/git add -A
+2025-04-25T15:48:23.2340298Z [command]/usr/bin/git -c author.name=metagrati -c author.email=128862859+metagrati@users.noreply.github.com -c committer.name=github-actions[bot] -c committer.email=41898282+github-actions[bot]@users.noreply.github.com commit -m chore(progress): auto-tick items
+2025-04-25T15:48:23.2400823Z [a21459d9-6a91-47d6-9b7c-331a1f74d5ca 7c40cc7] chore(progress): auto-tick items
+2025-04-25T15:48:23.2401430Z  Author: metagrati <128862859+metagrati@users.noreply.github.com>
+2025-04-25T15:48:23.2401839Z  1 file changed, 1 insertion(+), 1 deletion(-)
+2025-04-25T15:48:23.2407927Z [command]/usr/bin/git stash push --include-untracked
+2025-04-25T15:48:23.2436389Z No local changes to save
+2025-04-25T15:48:23.2441397Z Resetting working base branch 'progress-bot/14668457748'
+2025-04-25T15:48:23.2446284Z [command]/usr/bin/git checkout --progress progress-bot/14668457748 --
+2025-04-25T15:48:23.2478032Z Switched to branch 'progress-bot/14668457748'
+2025-04-25T15:48:23.2489666Z [command]/usr/bin/git reset --hard origin/progress-bot/14668457748
+2025-04-25T15:48:23.2525816Z HEAD is now at 29ee9b0 chore: trigger workflow to test permission settings
+2025-04-25T15:48:23.2530240Z Rebasing commits made to branch 'progress-bot/14668457748' on to base branch 'main'
+2025-04-25T15:48:23.2535332Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force --depth=1 origin main:main
+2025-04-25T15:48:23.7798386Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-04-25T15:48:23.7871523Z [command]/usr/bin/git checkout --progress main --
+2025-04-25T15:48:23.7902960Z Switched to branch 'main'
+2025-04-25T15:48:23.7906246Z Your branch is up to date with 'origin/main'.
+2025-04-25T15:48:23.7916309Z [command]/usr/bin/git rev-list --reverse progress-bot/14668457748..a21459d9-6a91-47d6-9b7c-331a1f74d5ca .
+2025-04-25T15:48:23.7944672Z 7c40cc70e0bf11ea9e40d87e92b23e2c0d4392e7
+2025-04-25T15:48:23.7954575Z [command]/usr/bin/git -c author.name=metagrati -c author.email=128862859+metagrati@users.noreply.github.com -c committer.name=github-actions[bot] -c committer.email=41898282+github-actions[bot]@users.noreply.github.com cherry-pick --strategy=recursive --strategy-option=theirs 7c40cc70e0bf11ea9e40d87e92b23e2c0d4392e7
+2025-04-25T15:48:23.7994265Z [main 7c40cc7] chore(progress): auto-tick items
+2025-04-25T15:48:23.7994987Z  Author: metagrati <128862859+metagrati@users.noreply.github.com>
+2025-04-25T15:48:23.7995374Z  Date: Fri Apr 25 15:48:23 2025 +0000
+2025-04-25T15:48:23.7995683Z  1 file changed, 1 insertion(+), 1 deletion(-)
+2025-04-25T15:48:23.8003059Z [command]/usr/bin/git checkout --progress -B a21459d9-6a91-47d6-9b7c-331a1f74d5ca HEAD --
+2025-04-25T15:48:23.8034072Z Switched to and reset branch 'a21459d9-6a91-47d6-9b7c-331a1f74d5ca'
+2025-04-25T15:48:23.8043798Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force --depth=1 origin main:main
+2025-04-25T15:48:24.3189929Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-04-25T15:48:24.3237775Z From https://github.com/metagrati/ProfitFlip
+2025-04-25T15:48:24.3238355Z  + 7c40cc7...29ee9b0 main       -> main  (forced update)
+2025-04-25T15:48:24.3267914Z [command]/usr/bin/git rev-list --right-only --count main...a21459d9-6a91-47d6-9b7c-331a1f74d5ca
+2025-04-25T15:48:24.3295345Z 1
+2025-04-25T15:48:24.3304896Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force --depth=11 origin progress-bot/14668457748:refs/remotes/origin/progress-bot/14668457748
+2025-04-25T15:48:24.7860473Z remote: Enumerating objects: 40, done.        
+2025-04-25T15:48:24.7861313Z remote: Counting objects:   2% (1/40)        
+2025-04-25T15:48:24.7862397Z remote: Counting objects:   5% (2/40)        
+2025-04-25T15:48:24.7863168Z remote: Counting objects:   7% (3/40)        
+2025-04-25T15:48:24.7863669Z remote: Counting objects:  10% (4/40)        
+2025-04-25T15:48:24.7864098Z remote: Counting objects:  12% (5/40)        
+2025-04-25T15:48:24.7864528Z remote: Counting objects:  15% (6/40)        
+2025-04-25T15:48:24.7864961Z remote: Counting objects:  17% (7/40)        
+2025-04-25T15:48:24.7865385Z remote: Counting objects:  20% (8/40)        
+2025-04-25T15:48:24.7865962Z remote: Counting objects:  22% (9/40)        
+2025-04-25T15:48:24.7866410Z remote: Counting objects:  25% (10/40)        
+2025-04-25T15:48:24.7866901Z remote: Counting objects:  27% (11/40)        
+2025-04-25T15:48:24.7867508Z remote: Counting objects:  30% (12/40)        
+2025-04-25T15:48:24.7868207Z remote: Counting objects:  32% (13/40)        
+2025-04-25T15:48:24.7868922Z remote: Counting objects:  35% (14/40)        
+2025-04-25T15:48:24.7869704Z remote: Counting objects:  37% (15/40)        
+2025-04-25T15:48:24.7870299Z remote: Counting objects:  40% (16/40)        
+2025-04-25T15:48:24.7870867Z remote: Counting objects:  42% (17/40)        
+2025-04-25T15:48:24.7871406Z remote: Counting objects:  45% (18/40)        
+2025-04-25T15:48:24.7871935Z remote: Counting objects:  47% (19/40)        
+2025-04-25T15:48:24.7872455Z remote: Counting objects:  50% (20/40)        
+2025-04-25T15:48:24.7873021Z remote: Counting objects:  52% (21/40)        
+2025-04-25T15:48:24.7873640Z remote: Counting objects:  55% (22/40)        
+2025-04-25T15:48:24.7874195Z remote: Counting objects:  57% (23/40)        
+2025-04-25T15:48:24.7875011Z remote: Counting objects:  60% (24/40)        
+2025-04-25T15:48:24.7875551Z remote: Counting objects:  62% (25/40)        
+2025-04-25T15:48:24.7876010Z remote: Counting objects:  65% (26/40)        
+2025-04-25T15:48:24.7876486Z remote: Counting objects:  67% (27/40)        
+2025-04-25T15:48:24.7877030Z remote: Counting objects:  70% (28/40)        
+2025-04-25T15:48:24.7877582Z remote: Counting objects:  72% (29/40)        
+2025-04-25T15:48:24.7878125Z remote: Counting objects:  75% (30/40)        
+2025-04-25T15:48:24.7878672Z remote: Counting objects:  77% (31/40)        
+2025-04-25T15:48:24.7879418Z remote: Counting objects:  80% (32/40)        
+2025-04-25T15:48:24.7880049Z remote: Counting objects:  82% (33/40)        
+2025-04-25T15:48:24.7880605Z remote: Counting objects:  85% (34/40)        
+2025-04-25T15:48:24.7881155Z remote: Counting objects:  87% (35/40)        
+2025-04-25T15:48:24.7881711Z remote: Counting objects:  90% (36/40)        
+2025-04-25T15:48:24.7882271Z remote: Counting objects:  92% (37/40)        
+2025-04-25T15:48:24.7882808Z remote: Counting objects:  95% (38/40)        
+2025-04-25T15:48:24.7883359Z remote: Counting objects:  97% (39/40)        
+2025-04-25T15:48:24.7883903Z remote: Counting objects: 100% (40/40)        
+2025-04-25T15:48:24.7884444Z remote: Counting objects: 100% (40/40), done.        
+2025-04-25T15:48:24.7885046Z remote: Compressing objects:   4% (1/23)        
+2025-04-25T15:48:24.7885621Z remote: Compressing objects:   8% (2/23)        
+2025-04-25T15:48:24.7886199Z remote: Compressing objects:  13% (3/23)        
+2025-04-25T15:48:24.7886772Z remote: Compressing objects:  17% (4/23)        
+2025-04-25T15:48:24.7887347Z remote: Compressing objects:  21% (5/23)        
+2025-04-25T15:48:24.7887941Z remote: Compressing objects:  26% (6/23)        
+2025-04-25T15:48:24.7888502Z remote: Compressing objects:  30% (7/23)        
+2025-04-25T15:48:24.7889067Z remote: Compressing objects:  34% (8/23)        
+2025-04-25T15:48:24.7889881Z remote: Compressing objects:  39% (9/23)        
+2025-04-25T15:48:24.7890482Z remote: Compressing objects:  43% (10/23)        
+2025-04-25T15:48:24.7891085Z remote: Compressing objects:  47% (11/23)        
+2025-04-25T15:48:24.7891660Z remote: Compressing objects:  52% (12/23)        
+2025-04-25T15:48:24.7892246Z remote: Compressing objects:  56% (13/23)        
+2025-04-25T15:48:24.7892839Z remote: Compressing objects:  60% (14/23)        
+2025-04-25T15:48:24.7893622Z remote: Compressing objects:  65% (15/23)        
+2025-04-25T15:48:24.7894210Z remote: Compressing objects:  69% (16/23)        
+2025-04-25T15:48:24.7894810Z remote: Compressing objects:  73% (17/23)        
+2025-04-25T15:48:24.7895415Z remote: Compressing objects:  78% (18/23)        
+2025-04-25T15:48:24.7896064Z remote: Compressing objects:  82% (19/23)        
+2025-04-25T15:48:24.7896662Z remote: Compressing objects:  86% (20/23)        
+2025-04-25T15:48:24.7897245Z remote: Compressing objects:  91% (21/23)        
+2025-04-25T15:48:24.7897830Z remote: Compressing objects:  95% (22/23)        
+2025-04-25T15:48:24.7898432Z remote: Compressing objects: 100% (23/23)        
+2025-04-25T15:48:24.7899105Z remote: Compressing objects: 100% (23/23), done.        
+2025-04-25T15:48:24.7900142Z remote: Total 36 (delta 23), reused 25 (delta 13), pack-reused 0 (from 0)        
+2025-04-25T15:48:24.8020539Z Pull request branch 'progress-bot/14668457748' already exists as remote branch 'origin/progress-bot/14668457748'
+2025-04-25T15:48:24.8025350Z [command]/usr/bin/git checkout --progress progress-bot/14668457748 --
+2025-04-25T15:48:24.8058770Z Switched to branch 'progress-bot/14668457748'
+2025-04-25T15:48:24.8068845Z [command]/usr/bin/git rev-list --right-only --count main...progress-bot/14668457748
+2025-04-25T15:48:24.8091535Z 0
+2025-04-25T15:48:24.8100378Z [command]/usr/bin/git diff --quiet progress-bot/14668457748..a21459d9-6a91-47d6-9b7c-331a1f74d5ca
+2025-04-25T15:48:24.8127693Z Resetting 'progress-bot/14668457748'
+2025-04-25T15:48:24.8131488Z [command]/usr/bin/git checkout --progress -B progress-bot/14668457748 a21459d9-6a91-47d6-9b7c-331a1f74d5ca --
+2025-04-25T15:48:24.8164341Z Reset branch 'progress-bot/14668457748'
+2025-04-25T15:48:24.8174885Z [command]/usr/bin/git rev-list --right-only --count origin/progress-bot/14668457748...progress-bot/14668457748
+2025-04-25T15:48:24.8197200Z 1
+2025-04-25T15:48:24.8202431Z Updated branch 'progress-bot/14668457748'
+2025-04-25T15:48:24.8205880Z [command]/usr/bin/git rev-list --right-only --count main...progress-bot/14668457748
+2025-04-25T15:48:24.8228071Z 1
+2025-04-25T15:48:24.8235219Z [command]/usr/bin/git rev-parse HEAD
+2025-04-25T15:48:24.8254177Z 7c40cc70e0bf11ea9e40d87e92b23e2c0d4392e7
+2025-04-25T15:48:24.8261815Z [command]/usr/bin/git branch --delete --force a21459d9-6a91-47d6-9b7c-331a1f74d5ca
+2025-04-25T15:48:24.8285964Z Deleted branch a21459d9-6a91-47d6-9b7c-331a1f74d5ca (was 7c40cc7).
+2025-04-25T15:48:24.8293283Z [command]/usr/bin/git checkout --progress progress-bot/14668457748 --
+2025-04-25T15:48:24.8323975Z Already on 'progress-bot/14668457748'
+2025-04-25T15:48:24.8331113Z ##[endgroup]
+2025-04-25T15:48:24.8331859Z ##[group]Pushing pull request branch to 'origin/progress-bot/14668457748'
+2025-04-25T15:48:24.8336122Z [command]/usr/bin/git push --force-with-lease origin progress-bot/14668457748:refs/heads/progress-bot/14668457748
+2025-04-25T15:48:25.5541408Z To https://github.com/metagrati/ProfitFlip
+2025-04-25T15:48:25.5542188Z    29ee9b0..7c40cc7  progress-bot/14668457748 -> progress-bot/14668457748
+2025-04-25T15:48:25.5580553Z ##[endgroup]
+2025-04-25T15:48:25.5581082Z ##[group]Create or update the pull request
+2025-04-25T15:48:25.5584287Z Attempting creation of pull request
+2025-04-25T15:48:25.8294949Z ##[error]GitHub Actions is not permitted to create or approve pull requests.
+2025-04-25T15:48:25.8303389Z ##[group]Restore git configuration
+2025-04-25T15:48:25.8304537Z [command]/usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+2025-04-25T15:48:25.8321065Z http.https://github.com/.extraheader
+2025-04-25T15:48:25.8331333Z [command]/usr/bin/git config --local --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+2025-04-25T15:48:25.8357403Z http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-04-25T15:48:25.8365576Z [command]/usr/bin/git config --local --unset http.https://github.com/.extraheader ^AUTHORIZATION:
+2025-04-25T15:48:25.8394962Z Unset config key 'http.https://github.com/.extraheader'
+2025-04-25T15:48:25.8400513Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-04-25T15:48:25.8434025Z Persisted git credentials restored
+2025-04-25T15:48:25.8439370Z [command]/usr/bin/git config --global --unset safe.directory /home/runner/work/ProfitFlip/ProfitFlip
+2025-04-25T15:48:25.8468528Z ##[endgroup]

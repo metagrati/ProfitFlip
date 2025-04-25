@@ -1,67 +1,67 @@
-﻿2025-04-25T15:25:16.5528773Z ##[group]Run actions/checkout@v4
-2025-04-25T15:25:16.5529562Z with:
-2025-04-25T15:25:16.5529955Z   repository: metagrati/ProfitFlip
-2025-04-25T15:25:16.5530625Z   token: ***
-2025-04-25T15:25:16.5531040Z   ssh-strict: true
-2025-04-25T15:25:16.5531453Z   ssh-user: git
-2025-04-25T15:25:16.5531881Z   persist-credentials: true
-2025-04-25T15:25:16.5532294Z   clean: true
-2025-04-25T15:25:16.5532671Z   sparse-checkout-cone-mode: true
-2025-04-25T15:25:16.5533168Z   fetch-depth: 1
-2025-04-25T15:25:16.5533583Z   fetch-tags: false
-2025-04-25T15:25:16.5534001Z   show-progress: true
-2025-04-25T15:25:16.5534434Z   lfs: false
-2025-04-25T15:25:16.5534829Z   submodules: false
-2025-04-25T15:25:16.5535214Z   set-safe-directory: true
-2025-04-25T15:25:16.5535804Z ##[endgroup]
-2025-04-25T15:25:16.7230337Z Syncing repository: metagrati/ProfitFlip
-2025-04-25T15:25:16.7232312Z ##[group]Getting Git version info
-2025-04-25T15:25:16.7233198Z Working directory is '/home/runner/work/ProfitFlip/ProfitFlip'
-2025-04-25T15:25:16.7234355Z [command]/usr/bin/git version
-2025-04-25T15:25:16.7283667Z git version 2.49.0
-2025-04-25T15:25:16.7311954Z ##[endgroup]
-2025-04-25T15:25:16.7325390Z Temporarily overriding HOME='/home/runner/work/_temp/c8176678-5246-4cde-9400-700027b09242' before making global git config changes
-2025-04-25T15:25:16.7339757Z Adding repository directory to the temporary git global config as a safe directory
-2025-04-25T15:25:16.7341054Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ProfitFlip/ProfitFlip
-2025-04-25T15:25:16.7372268Z Deleting the contents of '/home/runner/work/ProfitFlip/ProfitFlip'
-2025-04-25T15:25:16.7375595Z ##[group]Initializing the repository
-2025-04-25T15:25:16.7380102Z [command]/usr/bin/git init /home/runner/work/ProfitFlip/ProfitFlip
-2025-04-25T15:25:16.7476770Z hint: Using 'master' as the name for the initial branch. This default branch name
-2025-04-25T15:25:16.7478784Z hint: is subject to change. To configure the initial branch name to use in all
-2025-04-25T15:25:16.7480868Z hint: of your new repositories, which will suppress this warning, call:
-2025-04-25T15:25:16.7482674Z hint:
-2025-04-25T15:25:16.7483874Z hint: 	git config --global init.defaultBranch <name>
-2025-04-25T15:25:16.7485431Z hint:
-2025-04-25T15:25:16.7486397Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2025-04-25T15:25:16.7488302Z hint: 'development'. The just-created branch can be renamed via this command:
-2025-04-25T15:25:16.7489035Z hint:
-2025-04-25T15:25:16.7489444Z hint: 	git branch -m <name>
-2025-04-25T15:25:16.7490316Z Initialized empty Git repository in /home/runner/work/ProfitFlip/ProfitFlip/.git/
-2025-04-25T15:25:16.7496134Z [command]/usr/bin/git remote add origin https://github.com/metagrati/ProfitFlip
-2025-04-25T15:25:16.7529156Z ##[endgroup]
-2025-04-25T15:25:16.7530243Z ##[group]Disabling automatic garbage collection
-2025-04-25T15:25:16.7533492Z [command]/usr/bin/git config --local gc.auto 0
-2025-04-25T15:25:16.7561364Z ##[endgroup]
-2025-04-25T15:25:16.7562087Z ##[group]Setting up auth
-2025-04-25T15:25:16.7569250Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2025-04-25T15:25:16.7598213Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2025-04-25T15:25:16.7871408Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2025-04-25T15:25:16.7902507Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2025-04-25T15:25:16.8124168Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2025-04-25T15:25:16.8159173Z ##[endgroup]
-2025-04-25T15:25:16.8160368Z ##[group]Fetching the repository
-2025-04-25T15:25:16.8168886Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +05e1539e36a58def28adb9fa2690fe4a59ca1429:refs/remotes/origin/main
-2025-04-25T15:25:17.5037909Z From https://github.com/metagrati/ProfitFlip
-2025-04-25T15:25:17.5039442Z  * [new ref]         05e1539e36a58def28adb9fa2690fe4a59ca1429 -> origin/main
-2025-04-25T15:25:17.5066036Z ##[endgroup]
-2025-04-25T15:25:17.5067433Z ##[group]Determining the checkout info
-2025-04-25T15:25:17.5068377Z ##[endgroup]
-2025-04-25T15:25:17.5072072Z [command]/usr/bin/git sparse-checkout disable
-2025-04-25T15:25:17.5111506Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
-2025-04-25T15:25:17.5139188Z ##[group]Checking out the ref
-2025-04-25T15:25:17.5143438Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
-2025-04-25T15:25:17.5265204Z Switched to a new branch 'main'
-2025-04-25T15:25:17.5268153Z branch 'main' set up to track 'origin/main'.
-2025-04-25T15:25:17.5273769Z ##[endgroup]
-2025-04-25T15:25:17.5307008Z [command]/usr/bin/git log -1 --format=%H
-2025-04-25T15:25:17.5327877Z 05e1539e36a58def28adb9fa2690fe4a59ca1429
+﻿2025-04-25T15:48:18.6802385Z ##[group]Run actions/checkout@v4
+2025-04-25T15:48:18.6803217Z with:
+2025-04-25T15:48:18.6803626Z   repository: metagrati/ProfitFlip
+2025-04-25T15:48:18.6804266Z   token: ***
+2025-04-25T15:48:18.6804649Z   ssh-strict: true
+2025-04-25T15:48:18.6805041Z   ssh-user: git
+2025-04-25T15:48:18.6805438Z   persist-credentials: true
+2025-04-25T15:48:18.6805883Z   clean: true
+2025-04-25T15:48:18.6806266Z   sparse-checkout-cone-mode: true
+2025-04-25T15:48:18.6806747Z   fetch-depth: 1
+2025-04-25T15:48:18.6807131Z   fetch-tags: false
+2025-04-25T15:48:18.6807536Z   show-progress: true
+2025-04-25T15:48:18.6807938Z   lfs: false
+2025-04-25T15:48:18.6808310Z   submodules: false
+2025-04-25T15:48:18.6808710Z   set-safe-directory: true
+2025-04-25T15:48:18.6809510Z ##[endgroup]
+2025-04-25T15:48:18.8435295Z Syncing repository: metagrati/ProfitFlip
+2025-04-25T15:48:18.8437340Z ##[group]Getting Git version info
+2025-04-25T15:48:18.8438208Z Working directory is '/home/runner/work/ProfitFlip/ProfitFlip'
+2025-04-25T15:48:18.8439592Z [command]/usr/bin/git version
+2025-04-25T15:48:18.8476704Z git version 2.49.0
+2025-04-25T15:48:18.8503659Z ##[endgroup]
+2025-04-25T15:48:18.8522988Z Temporarily overriding HOME='/home/runner/work/_temp/3e118d75-249e-4e7b-a4c0-a2a2657920a2' before making global git config changes
+2025-04-25T15:48:18.8524406Z Adding repository directory to the temporary git global config as a safe directory
+2025-04-25T15:48:18.8527865Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ProfitFlip/ProfitFlip
+2025-04-25T15:48:18.8561499Z Deleting the contents of '/home/runner/work/ProfitFlip/ProfitFlip'
+2025-04-25T15:48:18.8564892Z ##[group]Initializing the repository
+2025-04-25T15:48:18.8568660Z [command]/usr/bin/git init /home/runner/work/ProfitFlip/ProfitFlip
+2025-04-25T15:48:18.8631887Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-04-25T15:48:18.8633581Z hint: is subject to change. To configure the initial branch name to use in all
+2025-04-25T15:48:18.8634831Z hint: of your new repositories, which will suppress this warning, call:
+2025-04-25T15:48:18.8636024Z hint:
+2025-04-25T15:48:18.8636791Z hint: 	git config --global init.defaultBranch <name>
+2025-04-25T15:48:18.8637729Z hint:
+2025-04-25T15:48:18.8638579Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-04-25T15:48:18.8639934Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-04-25T15:48:18.8640663Z hint:
+2025-04-25T15:48:18.8641045Z hint: 	git branch -m <name>
+2025-04-25T15:48:18.8641763Z Initialized empty Git repository in /home/runner/work/ProfitFlip/ProfitFlip/.git/
+2025-04-25T15:48:18.8650687Z [command]/usr/bin/git remote add origin https://github.com/metagrati/ProfitFlip
+2025-04-25T15:48:18.8683794Z ##[endgroup]
+2025-04-25T15:48:18.8684992Z ##[group]Disabling automatic garbage collection
+2025-04-25T15:48:18.8688211Z [command]/usr/bin/git config --local gc.auto 0
+2025-04-25T15:48:18.8716734Z ##[endgroup]
+2025-04-25T15:48:18.8717909Z ##[group]Setting up auth
+2025-04-25T15:48:18.8724505Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-04-25T15:48:18.8755366Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-04-25T15:48:18.9028645Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-04-25T15:48:18.9058423Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-04-25T15:48:18.9282458Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-04-25T15:48:18.9323398Z ##[endgroup]
+2025-04-25T15:48:18.9324593Z ##[group]Fetching the repository
+2025-04-25T15:48:18.9333302Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +29ee9b03e03ef99d0ec15da811effaf776f040c3:refs/remotes/origin/main
+2025-04-25T15:48:19.5891213Z From https://github.com/metagrati/ProfitFlip
+2025-04-25T15:48:19.5894395Z  * [new ref]         29ee9b03e03ef99d0ec15da811effaf776f040c3 -> origin/main
+2025-04-25T15:48:19.5917824Z ##[endgroup]
+2025-04-25T15:48:19.5918577Z ##[group]Determining the checkout info
+2025-04-25T15:48:19.5921167Z ##[endgroup]
+2025-04-25T15:48:19.5926833Z [command]/usr/bin/git sparse-checkout disable
+2025-04-25T15:48:19.5965769Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-04-25T15:48:19.5992882Z ##[group]Checking out the ref
+2025-04-25T15:48:19.5996761Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-04-25T15:48:19.6142065Z Switched to a new branch 'main'
+2025-04-25T15:48:19.6144790Z branch 'main' set up to track 'origin/main'.
+2025-04-25T15:48:19.6150308Z ##[endgroup]
+2025-04-25T15:48:19.6184436Z [command]/usr/bin/git log -1 --format=%H
+2025-04-25T15:48:19.6206062Z 29ee9b03e03ef99d0ec15da811effaf776f040c3
