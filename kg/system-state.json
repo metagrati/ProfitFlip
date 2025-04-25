@@ -160,6 +160,95 @@
       "schema:name": "kg/plan_enable_debug_logs.json",
       "schema:description": "KG outlining the plan to enable and analyze debug logs for the PR permission failure.",
       "pf:basedOnMotivation": "file:motivation-enable-debug-logs"
+    },
+    {
+      "@id": "file:motivation-execute-debug-result",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/motivation_execute_debug_plan_and_log_result-20250724T120000Z.json",
+      "schema:description": "KG documenting the motivation for executing the debug log plan and documenting its result.",
+      "pf:basedOnPlan": "file:plan-enable-debug-logs"
+    },
+    {
+      "@id": "file:plan-execute-debug-result",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/plan_execute_debug_plan_and_log_result-20250724T120000Z.json",
+      "schema:description": "KG outlining the plan to execute the debug log enabling plan and document its result. This is the current focus.",
+      "pf:basedOnMotivation": "file:motivation-execute-debug-result",
+      "executesPlan": "file:plan-enable-debug-logs",
+      "createsArtifact": "pf:artifact/result-enable-debug-logs"
+    },
+    {
+      "@id": "file:archived-result-investigate-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/result_investigate_pr_perms_success.json",
+      "schema:description": "[Archived] KG documenting the successful outcome of investigating PR permissions."
+    },
+    {
+      "@id": "file:archived-result-trigger-failed-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/result_workflow_trigger_failed.json",
+      "schema:description": "[Archived] KG documenting the failed outcome of re-triggering the workflow."
+    },
+    {
+      "@id": "file:archived-plan-investigate-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/next_step_plan_pr_investigation.json",
+      "schema:description": "[Archived] KG outlining the plan to investigate the PR permission failure."
+    },
+    {
+      "@id": "file:archived-motivation-investigate-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/next_step_motivation_pr_investigation.json",
+      "schema:description": "[Archived] KG documenting the motivation for investigating the PR permission failure."
+    },
+    {
+      "@id": "file:archived-result-resolve-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/immediate_next_step_result.json",
+      "schema:description": "[Archived] KG documenting the failed outcome of the initial plan to resolve the PR permission failure."
+    },
+    {
+      "@id": "file:archived-plan-resolve-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/immediate_next_step_plan.json",
+      "schema:description": "[Archived] KG outlining the initial plan to resolve the PR permission failure."
+    },
+    {
+      "@id": "file:archived-motivation-pr-perms",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/immediate_next_step_motivation.json",
+      "schema:description": "[Archived] KG documenting the initial motivation for addressing the PR permission failure."
+    },
+     {
+      "@id": "file:archived-review-kg-files",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ReviewDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/review-kg-files.json",
+      "schema:description": "[Archived] KG summarizing a review of KG files."
+    },
+    {
+      "@id": "file:archived-plan",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/plan.json",
+      "schema:description": "[Archived] Older general plan KG."
+    },
+    {
+      "@id": "file:archived-meta-plan",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/meta-plan.json",
+      "schema:description": "[Archived] Older meta-plan KG."
+    },
+    {
+      "@id": "file:archived-requirements",
+      "@type": ["pf:File", "pf:KnowledgeGraph", "pf:RequirementsDocument", "schema:SoftwareSourceCode"],
+      "schema:name": "kg/archive/Requirements + Specification.json",
+      "schema:description": "[Archived] Older requirements KG."
+    },
+    {
+        "@id": "file:result-enable-debug-logs-success",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/result_enable_debug_logs-20250724T123000Z.json",
+        "schema:description": "KG documenting the successful outcome of the plan to enable debug logs.",
+        "pf:outcomeOfPlan": "file:plan-enable-debug-logs"
     }
   ]
 } 
