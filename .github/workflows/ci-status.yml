@@ -1,8 +1,16 @@
 name: CI Status
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [ main ] # Or your main branches
+  pull_request:
+    branches: [ main ] # Or your main branches
+  workflow_dispatch: # Allow manual trigger
+
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write # Needed to commit checklist updates and create PRs
+  pull-requests: write # Explicitly grant permission to create PRs
+
 jobs:
   progress:
     runs-on: ubuntu-latest
