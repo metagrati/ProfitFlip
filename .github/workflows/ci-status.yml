@@ -13,9 +13,7 @@ jobs:
       - uses: ./.github/actions/tick-checklist
         with:
           path: docs/plan-b2.checklist.md
-          item: |
-            P1 secrets-verify committed and green in CI
-            Green-flag drill completed (`./scripts/run-green-flag.sh`)
+          item: P1 secrets-verify committed and green in CI
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: progress-bot/${{ github.run_id }}
