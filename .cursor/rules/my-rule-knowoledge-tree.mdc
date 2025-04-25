@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+**KG Workflow Awareness:**
+*   **Context:** Always be mindful of the Knowledge Graph management workflow defined in `kg/workflow-kg-management.json`. This file describes the standard procedure for reviewing KGs, generating reviews, creating plans, refining plans, and updating the system state KG (`kg/system-state.json`).
+*   **Application:** Before undertaking any task involving files within the `/kg` directory (e.g., creating, modifying, reviewing KGs, planning next steps), consult this workflow mentally.
+*   **Action Planning:** When proposing actions related to KGs, briefly consider and, if appropriate, mention how the action aligns with the steps defined in the workflow (e.g., "This aligns with the 'Plan Next Step' phase of the workflow").
+*   **Pre-Commit Check:** Specifically remember the 'Update System State KG' step, which should occur before committing significant changes affecting the KGs or the system they represent.
