@@ -1,11 +1,16 @@
 {
   "devDependencies": {
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "typescript": "^5.5.4",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.1",
     "glob": "^11.0.2",
     "marked": "^15.0.9",
     "yargs": "^17.7.2"
+  },
+  "scripts": {
+    "secrets:verify": "ts-node scripts/secrets-verify.ts"
   }
 }
