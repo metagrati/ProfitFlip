@@ -16,6 +16,12 @@ jobs:
         with:
           path: docs/plan-b2.checklist.md
           item: P1 secrets-verify committed and green in CI
+      - name: Create progress-bot branch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git checkout -b progress-bot/${{ github.run_id }}
+          git push origin progress-bot/${{ github.run_id }}
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: progress-bot/${{ github.run_id }}
