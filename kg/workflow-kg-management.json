@@ -30,7 +30,8 @@
     "wf:step/SavePlanKG",
     "wf:step/ReviewPlanKG",
     "wf:step/RefinePlanKG",
-    "wf:step/UpdateSystemStateKG"
+    "wf:step/UpdateSystemStateKG",
+    "wf:step/ArchiveCompletedKGs"
   ],
   "@graph": [
     // Workflow Steps
@@ -96,8 +97,18 @@
       "name": "Update System State KG",
       "description": "Update the system-state.json KG to reflect any changes made during the preceding steps.",
       "triggerCondition": "Before every commit involving KG or related system changes.",
-      "modifies": "artifact:kg-system-state"
+      "modifies": "artifact:kg-system-state",
+      "precedes": "wf:step/ArchiveCompletedKGs"
       // This step implicitly precedes the actual git commit action.
+    },
+    {
+      "@id": "wf:step/ArchiveCompletedKGs",
+      "@type": "wf:WorkflowStep",
+      "name": "Archive Completed KGs",
+      "description": "Move completed or irrelevant motivation, plan, and result KGs from the main /kg directory to kg/archive/. This is typically done after a task cycle is complete and before starting the next major review/planning cycle.",
+      "targets": "pf:File",
+      "triggerCondition": "End of a task cycle or when KG clutter needs reduction."
+      // This step implicitly precedes the start of the next ReviewExistingKGs phase
     },
 
     // Referenced Artifact Types/Placeholders

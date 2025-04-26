@@ -239,6 +239,22 @@ docker compose restart db
 
 (*If your local `make` output differs, sync this table with the recipes in `Makefile`.*)
 
+---
+
+### 7  🐳 Docker Development Environment `<!-- ./docs/docker-dev -->`
+
+This project provides a Dockerfile (`Dockerfile.dev`) to create a consistent development environment with all necessary tools (Node.js, pnpm, Make, Git) pre-installed.
+
+*   **Build the image:**
+    ```bash
+    make docker-build-dev
+    ```
+*   **Run interactively:**
+    ```bash
+    make docker-run-dev
+    ```
+    This will start a container and drop you into a `bash` shell inside `/app`, with your local project directory mounted. You can then run `make`, `pnpm`, `git`, and other project commands within this consistent environment.
+
 <!-- Workflow Trigger: 2025-07-24T12:15:00Z -->
 <!-- Workflow Trigger: 2025-07-24T12:45:00Z -->
 <!-- Workflow Trigger: 2025-07-24T13:00:00Z -->

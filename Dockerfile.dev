@@ -1,0 +1,28 @@
+# Dockerfile.dev
+# Base image with Node.js LTS
+FROM node:lts-alpine
+
+# Install git and make
+RUN apk add --no-cache make git
+
+# Enable corepack to use pnpm
+RUN corepack enable
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependency definition files
+COPY package.json pnpm-lock.yaml ./
+
+# Install all dependencies including devDependencies
+# Using --frozen-lockfile ensures we use exact versions from lockfile
+RUN pnpm install --frozen-lockfile
+
+# Copy the rest of the application code
+COPY . .
+
+# Reset the entrypoint inherited from base image
+ENTRYPOINT [""]
+
+# (Optional) Define a default command, e.g., open a bash shell
+CMD ["bash"] 

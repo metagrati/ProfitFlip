@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "wf": "https://profitflip.io/kg/workflow#",
+    "schema": "http://schema.org/",
+    "basedOnMotivation": { "@id": "pf:basedOnMotivation", "@type": "@id" },
+    "createsArtifact": { "@id": "pf:createsArtifact", "@type": "@id", "@container": "@set" },
+    "modifiesArtifact": { "@id": "pf:modifiesArtifact", "@type": "@id", "@container": "@set" },
+    "hasStep": { "@id": "wf:hasStep", "@type": "@id", "@container": "@list" }
+  },
+  "@id": "pf:plan/dockerize_app/20250724T140000Z",
+  "@type": ["pf:ExecutionPlan", "pf:KnowledgeGraph"],
+  "schema:name": "Plan to Dockerize the ProfitFlip Application",
+  "schema:description": "Outlines the steps to create Docker configuration files (Dockerfile, .dockerignore) and update documentation for the ProfitFlip application.",
+  "schema:dateCreated": "2025-07-24T14:00:00Z",
+  "basedOnMotivation": "pf:motivation/dockerize_app/20250724T140000Z",
+  "createsArtifact": ["pf:file/Dockerfile", "pf:file/Dockerignore"],
+  "modifiesArtifact": ["pf:file/Makefile", "pf:file/readme-md"],
+  "hasStep": [
+    {
+      "@id": "pf:step/create-dockerfile",
+      "@type": "wf:WorkflowStep",
+      "schema:name": "Create Dockerfile",
+      "schema:description": "Create a Dockerfile in the project root. Use an appropriate Node.js base image (consider one with pnpm). Set WORKDIR, copy package.json/pnpm-lock.yaml, run pnpm install, copy source, run build command (e.g., pnpm build), EXPOSE the correct port, and set the CMD to run the production application."
+    },
+    {
+      "@id": "pf:step/create-dockerignore",
+      "@type": "wf:WorkflowStep",
+      "schema:name": "Create .dockerignore",
+      "schema:description": "Create a .dockerignore file in the project root to exclude unnecessary files/directories from the build context (e.g., .git, node_modules, .env, build outputs, archives, logs)."
+    },
+    {
+      "@id": "pf:step/update-makefile",
+      "@type": "wf:WorkflowStep",
+      "schema:name": "Update Makefile (Optional)",
+      "schema:description": "Optionally, add new targets to the Makefile for building (`make docker-build`) and running (`make docker-run`) the Docker container locally."
+    },
+    {
+      "@id": "pf:step/update-readme",
+      "@type": "wf:WorkflowStep",
+      "schema:name": "Update README.md",
+      "schema:description": "Add a new section to README.md explaining how to build and run the application using Docker. Update existing sections (e.g., Tech Stack) if necessary."
+    }
+  ]
+} 

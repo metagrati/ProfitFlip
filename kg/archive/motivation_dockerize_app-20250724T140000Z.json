@@ -1,0 +1,23 @@
+{
+  "@context": {
+    "pf": "https://profitflip.io/kg/v1#",
+    "wf": "https://profitflip.io/kg/workflow#",
+    "schema": "http://schema.org/",
+    "basedOnState": { "@id": "pf:basedOnState", "@type": "@id" }
+  },
+  "@id": "pf:motivation/dockerize_app/20250724T140000Z",
+  "@type": ["pf:MotivationDocument", "pf:KnowledgeGraph"],
+  "schema:name": "Motivation for Dockerizing the ProfitFlip Application",
+  "schema:description": "Explains the reasons and benefits for containerizing the main ProfitFlip application (Node.js/React frontend) using Docker.",
+  "schema:dateCreated": "2025-07-24T14:00:00Z",
+  "basedOnState": "pf:file/system-state",
+  "pf:reasoning": [
+    "Environment Consistency: Ensure the app runs identically across local development, CI, and deployment environments (e.g., Fly.io) by fixing the Node.js/pnpm versions and dependencies.",
+    "Dependency Encapsulation: Package specific tool versions and node_modules within the image for reproducibility and isolation from the host system.",
+    "Simplified Deployment: Create a single, portable Docker image artifact, streamlining deployment processes within the CI/CD pipeline.",
+    "Improved CI Efficiency: Leverage Docker layer caching during `pnpm install` to potentially speed up CI build times.",
+    "Alignment with Principles: Supports the project's CI-first approach and focus on durable, reusable artifacts by standardizing the application's runtime environment.",
+    "Infrastructure Alignment: Complements the existing use of Docker Compose mentioned for other infrastructure components."
+  ],
+  "pf:proposedNextStep": "Create a Dockerfile, .dockerignore, and potentially update Makefile/README.md to enable building and running the ProfitFlip application as a Docker container."
+} 

@@ -249,6 +249,46 @@
         "schema:name": "kg/result_enable_debug_logs-20250724T123000Z.json",
         "schema:description": "KG documenting the successful outcome of the plan to enable debug logs.",
         "pf:outcomeOfPlan": "file:plan-enable-debug-logs"
+    },
+    {
+        "@id": "file:motivation-dockerize-app",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/motivation_dockerize_app-20250724T140000Z.json",
+        "schema:description": "KG documenting the motivation for dockerizing the application."
+    },
+    {
+        "@id": "file:plan-dockerize-app",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/plan_dockerize_app-20250724T140000Z.json",
+        "schema:description": "KG outlining the plan to dockerize the application. This is the current focus.",
+        "pf:basedOnMotivation": "file:motivation-dockerize-app"
+    },
+    {
+        "@id": "file:result-dockerize-app-success",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/result_dockerize_app_success-20250724T143000Z.json",
+        "schema:description": "KG documenting the successful outcome of the plan to dockerize the dev environment.",
+        "pf:outcomeOfPlan": "file:plan-dockerize-app"
+    },
+    {
+        "@id": "file:archived-motivation-dockerize-app",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:MotivationDocument", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/archive/motivation_dockerize_app-20250724T140000Z.json",
+        "schema:description": "[Archived] KG documenting the motivation for dockerizing the application."
+    },
+    {
+        "@id": "file:archived-plan-dockerize-app",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:ExecutionPlan", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/archive/plan_dockerize_app-20250724T140000Z.json",
+        "schema:description": "[Archived] KG outlining the plan to dockerize the application.",
+        "pf:basedOnMotivation": "file:archived-motivation-dockerize-app"
+    },
+    {
+        "@id": "file:archived-result-dockerize-app-success",
+        "@type": ["pf:File", "pf:KnowledgeGraph", "pf:PlanResult", "schema:SoftwareSourceCode"],
+        "schema:name": "kg/archive/result_dockerize_app_success-20250724T143000Z.json",
+        "schema:description": "[Archived] KG documenting the successful outcome of the plan to dockerize the dev environment.",
+        "pf:outcomeOfPlan": "file:archived-plan-dockerize-app"
     }
   ]
 } 

@@ -23,3 +23,16 @@ smoke:
 	# Add Playwright tests here if configured
 	@echo "✅ Smoke tests passed."
 
+# Docker Development Environment
+.PHONY: docker-build-dev docker-run-dev
+
+docker-build-dev:
+	@echo "Building development Docker image..."
+	docker build -t profitflip-dev -f Dockerfile.dev .
+
+docker-run-dev:
+	@echo "Running development Docker image interactively..."
+	@echo "Mounting current directory to /app in the container."
+	# Override default entrypoint (node) and run the available shell (/bin/sh for Alpine)
+	docker run -it --rm -v .:/app --entrypoint /bin/sh profitflip-dev
+
